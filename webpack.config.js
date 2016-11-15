@@ -5,5 +5,6 @@ module.exports = nWebpack({
         './public/main.js': './client/main.js',
         './public/main.css': './client/main.scss'
     },
-    withHashedAssets: true
-});
+    withHashedAssets: true,
+    withHeadCss: true,
+}, true);
