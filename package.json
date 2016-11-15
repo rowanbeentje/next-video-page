@@ -4,7 +4,8 @@
   "description": "Video page",
   "main": "server/app.js",
   "dependencies": {
-    "@financial-times/n-express": "^17.16.1"
+    "@financial-times/n-express": "^17.16.1",
+    "forever": "^0.15.3"
   },
   "devDependencies": {
     "@financial-times/n-heroku-tools": "^6.14.10",
