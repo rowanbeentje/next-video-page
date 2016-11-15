@@ -9,7 +9,7 @@ run:
 
 provision:
 	nht provision ${TEST_APP}
-	nht configure ft-next-video-page ${TEST_APP}
+	nht configure ft-next-video-page ${TEST_APP} --overrides "NODE_ENV=branch"
 	nht deploy-hashed-assets
 	nht deploy ${TEST_APP}
 
