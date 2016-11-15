@@ -1,5 +1,5 @@
 module.exports = [{
-    urls: {
-        '/': 200
-    }
+	urls: {
+		'/': 200
+	}
 }];
