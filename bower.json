@@ -1,0 +1,6 @@
+{
+  "name": "next-video-page",
+  "dependencies": {
+    "n-ui": "^2.54.1"
+  }
+}
