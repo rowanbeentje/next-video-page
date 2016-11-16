@@ -2,10 +2,14 @@
 	<div class="o-grid-row">
 		<div data-o-grid-colspan="offset1 10">
 			<h1>{{video.title}}</h1>
-			<div data-o-component="o-video o-video--large"
-				data-o-video-id="{{video.id}}"
-				data-o-video-classes="video"
-				data-o-video-placeholder data-o-video-advertising></div>
+			<div class="video-container">
+				<div
+					class="o-video"
+					data-o-component="o-video o-video--large"
+					data-o-video-id="{{video.id}}"
+					data-o-video-placeholder="data-o-video-placeholder"
+					data-o-video-advertising="data-o-video-advertising"></div>
+			</div>
 		</div>
 	</div>
 </div>
