@@ -9,7 +9,6 @@ const app = express({
 	layoutsDir: path.join(process.cwd(), 'bower_components', 'n-ui', 'layout'),
 	systemCode: 'next-video-page',
 	withAnonMiddleware: true,
-	withBackendAuthentication: true,
 	withFlags: true,
 	withHandlebars: true,
 	withNavigation: true
