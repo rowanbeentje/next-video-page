@@ -1,0 +1,31 @@
+<div class="o-grid-container">
+	<h1>{{video.title}}</h1>
+	<div class="o-grid-row">
+		<div data-o-grid-colspan="offset1 10">
+			<div class="video-container">
+				<div
+					class="o-video"
+					data-o-component="o-video o-video--large"
+					data-o-video-id="{{video.id}}"
+					data-o-video-placeholder="true"
+					data-o-video-advertising="true"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+{{#each sections}}
+<div class="o-grid-container">
+	<h2>{{this.title}}</h2>
+	<div class="o-grid-row">
+		{{#each this.videos}}
+		<div data-o-grid-colspan="3">
+			<a href="/videos/{{this.id}}" data-trackable="video">
+				<img src="{{this.image.rawSrc}}" width="100%" />
+				<h3>{{this.title}} ({{this.duration}})</h3>
+			</a>
+		</div>
+		{{/each}}
+	</div>
+</div>
+{{/each}}
