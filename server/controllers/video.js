@@ -1,15 +1,21 @@
-module.exports = (req, res, next) => {
-	res.nextMetricsName = 'video';
-	const id = req.params.id;
-	const query = `{
+const query = id => {
+	return `{
 		video {
-			video(id: "${id}") {
-				id
-				title
+			${
+				id ?
+				`video(id: "${id}") {
+					id
+					title
+				}` : 
+				`video: editorsPicks(limit: 1) {
+					id
+					title
+				}`
 			}
 			editorsPicks(limit: 4) {
 				id
 				title
+				duration
 				image {
 					rawSrc
 				}
@@ -17,6 +23,7 @@ module.exports = (req, res, next) => {
 			world: section(id: "MQ==-U2VjdGlvbnM=", limit: 4) {
 				id
 				title
+				duration
 				image {
 					rawSrc
 				}
@@ -24,6 +31,7 @@ module.exports = (req, res, next) => {
 			lex: section(id: "MTE1-U2VjdGlvbnM=", limit: 4) {
 				id
 				title
+				duration
 				image {
 					rawSrc
 				}
@@ -31,20 +39,25 @@ module.exports = (req, res, next) => {
 			companies: section(id: "Mjk=-U2VjdGlvbnM=", limit: 4) {
 				id
 				title
+				duration
 				image {
 					rawSrc
 				}
 			}
 		}
 	}`;
+};
 
-	fetch(`https://next-api.ft.com/v1/query?query=${query}&source=next-video-page`, {
+module.exports = (req, res, next) => {
+	res.nextMetricsName = 'video';
+	const id = req.params.id;
+	fetch(`https://next-api.ft.com/v1/query?query=${query(id)}&source=next-video-page`, {
 		timeout: 3000,
 		headers: {}
 	})
 		.then(response => response.json())
 		.then(({ data: { video: videos = {} } = {} } = {}) => {
-			const video = videos.video;
+			const video = Array.isArray(videos.video) ? videos.video[0] : videos.video;
 			const sections = [
 				{
 					title: 'Editor‘s Picks',
