@@ -1,8 +1,9 @@
 module.exports = (req, res, next) => {
-	res.nextMetricsName = 'hub';
+	res.nextMetricsName = 'video';
+	const id = req.params.id;
 	const query = `{
 		video {
-			video: editorsPicks(limit: 1) {
+			video(id: "${id}") {
 				id
 				title
 			}
@@ -43,7 +44,7 @@ module.exports = (req, res, next) => {
 	})
 		.then(response => response.json())
 		.then(({ data: { video: videos = {} } = {} } = {}) => {
-			const video = videos.video[0];
+			const video = videos.video;
 			const sections = [
 				{
 					title: 'Editor‘s Picks',
@@ -64,7 +65,7 @@ module.exports = (req, res, next) => {
 			];
 			res.render('video', {
 				layout: 'wrapper',
-				title: 'Financial Times | Video',
+				title: `Financial Times | Video | ${video.title}`,
 				video,
 				sections
 			});

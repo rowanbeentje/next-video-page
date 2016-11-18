@@ -15,7 +15,8 @@ const app = express({
 });
 
 app.get('/__gtg', controllers.gtg);
-app.get('/', controllers.hub);
+app.get('/videos', controllers.hub);
+app.get('/videos/:id', controllers.video);
 
 const listen = app.listen(process.env.PORT || 3001);
 
