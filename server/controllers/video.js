@@ -6,7 +6,7 @@ const query = id => {
 				`video(id: "${id}") {
 					id
 					title
-				}` : 
+				}` :
 				`video: editorsPicks(limit: 1) {
 					id
 					title
