@@ -1,7 +1,16 @@
 {
   "name": "next-video-page",
   "dependencies": {
+    "n-image": "^4.9.1",
+    "n-teaser": "^0.1.3",
+    "n-teaser-collection": "^0.2.0",
     "n-ui": "^2.54.1",
+    "o-teaser": "^1.0.0-beta.5",
+    "o-teaser-collection": "#design-debt",
     "o-video": "^2.3.12"
+  },
+  "resolutions": {
+    "o-teaser": "design-debt",
+    "o-icons": "^5.1.3"
   }
 }
