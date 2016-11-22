@@ -16,7 +16,10 @@ $o-teaser-collection-is-silent: false;
 $o-image-is-silent: false;
 @import 'n-image/main';
 
-.video-container {
-	width: 640px;
-	height: 360px;
+.highlight {
+	margin-bottom: 35px;
+}
+
+.highlight__image {
+	width: 100%
 }
