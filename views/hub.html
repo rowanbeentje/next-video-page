@@ -1,10 +1,14 @@
-<div class="highlight o-grid-container">
+<div class="highlight o-grid-container" data-trackable="highlight">
 	<div class="o-grid-row">
 		<div data-o-grid-colspan="12 M6">
-			<img src="{{highlight.image.src}}" class="highlight__image" />
+			<a href="{{highlight.url}}" data-trackable="image">
+				<img src="{{highlight.image.src}}" class="highlight__image" />
+			</a>
 		</div>
 		<div data-o-grid-colspan="12 M6">
-			<h2>{{highlight.title}}</h2>
+			<h2>
+				<a href="{{highlight.url}}" data-trackable="title">{{highlight.title}}</a>
+			</h2>
 			<div>{{{highlight.bodyHTML}}}</div>
 		</div>
 	</div>
