@@ -1,7 +1,7 @@
 const gtg = require('./gtg');
-const video = require('./video');
+const hub = require('./hub');
 
 module.exports = {
 	gtg,
-	video
+	hub
 };

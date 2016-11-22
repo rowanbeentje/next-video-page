@@ -1,15 +1,15 @@
-<div class="o-grid-container">
-	<h1>{{video.title}}</h1>
+<div class="highlight o-grid-container" data-trackable="highlight">
 	<div class="o-grid-row">
-		<div data-o-grid-colspan="offset1 10">
-			<div class="video-container">
-				<div
-					class="o-video"
-					data-o-component="o-video o-video--large"
-					data-o-video-id="{{video.id}}"
-					data-o-video-placeholder="true"
-					data-o-video-advertising="true"></div>
-			</div>
+		<div data-o-grid-colspan="12 M6">
+			<a href="{{highlight.url}}" data-trackable="image">
+				<img src="{{highlight.image.src}}" class="highlight__image" />
+			</a>
+		</div>
+		<div data-o-grid-colspan="12 M6">
+			<h2>
+				<a href="{{highlight.url}}" data-trackable="title">{{highlight.title}}</a>
+			</h2>
+			<div>{{{highlight.bodyHTML}}}</div>
 		</div>
 	</div>
 </div>
@@ -19,14 +19,13 @@
 		<h2 class="o-teaser-collection__heading o-teaser-collection__heading--half-width">
 			{{#if url}}
 				<a href="{{url}}" data-trackable="slice-title">{{title}}</a>
-				<!--<span>See all {{videoCount}} videos</span>-->
 			{{else}}
 				{{title}}
 			{{/if}}
 		</h2>
 		<div class="o-grid-row">
 			{{#each videos}}
-			<div data-o-grid-colspan="3">
+			<div data-o-grid-colspan="12 M6 L3">
 				{{>n-teaser/templates/heavy
 					mods=(array 'small' 'stacked')
 					position='{"default": "bottom"}'}}
