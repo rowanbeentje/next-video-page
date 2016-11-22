@@ -75,7 +75,7 @@ module.exports = (req, res, next) => {
 			const sections = [markets, companies, world, lifeAndArts].map(normaliseTag);
 			const slices = [
 				{
-					title: 'Latest Videos',
+					title: 'Latest',
 					videos: latestVideos.map(normaliseVideo)
 				},
 				...sections
