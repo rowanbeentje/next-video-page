@@ -17,9 +17,10 @@ $o-image-is-silent: false;
 @import 'n-image/main';
 
 .highlight {
+	margin-top: 35px;
 	margin-bottom: 35px;
 }
 
 .highlight__image {
-	width: 100%
+	width: 100%;
 }

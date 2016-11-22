@@ -82,7 +82,7 @@ module.exports = (req, res, next) => {
 			];
 			res.render('hub', {
 				layout: 'wrapper',
-				title: `Financial Times | Videos`,
+				title: 'Financial Times | Videos',
 				highlight: normaliseVideo(highlight),
 				slices
 			});
