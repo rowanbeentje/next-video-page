@@ -40,7 +40,7 @@ module.exports = (req, res) => {
 			}
 		})
 		.catch(err => {
-			logger.error({ event: 'NEXT_API_RESPONSE_ERROR' }, err);
+			logger.error({ event: 'BACKEND_ERROR', backend: 'next-api' }, err);
 			res.redirect('/videos');
 		});
 };
