@@ -35,7 +35,7 @@ module.exports = (req, res) => {
 				// https://github.com/Financial-Times/next-es-interface/pull/605
 				res.redirect(301, `/content/${video.id}`);
 			} else {
-				logger.error({ event: 'UNKNOWN_BRIGHTCOVE_VIDEO', brightcove_id: brightcoveId });
+				logger.error({ event: 'NO_VIDEO_CONTENT', brightcove_id: brightcoveId });
 				res.redirect('/videos');
 			}
 		})
