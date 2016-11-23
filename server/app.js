@@ -16,6 +16,12 @@ const app = express({
 
 app.get('/__gtg', controllers.gtg);
 app.get('/videos', controllers.hub);
+/**
+ * Handle moving traffic over from the old video.ft.com site, e.g urls of the format
+ *
+ *  - /videos/5215993791001
+ *  - /videos/5215993791001//Fillon-and-the-French-centre-right-vote/Editors-Choice
+ */
 app.get('/videos/:id*?', controllers.video);
 
 const listen = app.listen(process.env.PORT || 3001);
