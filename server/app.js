@@ -22,7 +22,11 @@ app.get('/videos', controllers.hub);
  *  - /videos/5215993791001
  *  - /videos/5215993791001//Fillon-and-the-French-centre-right-vote/Editors-Choice
  */
-app.get('/videos/:id*?', controllers.video);
+app.get('/videos/:id(\\d+)*?', controllers.video);
+/**
+ * Currently acting as a catch all while we redirect traffic from video.ft.com
+ */
+app.get('/videos/*', controllers.section);
 
 const listen = app.listen(process.env.PORT || 3001);
 
