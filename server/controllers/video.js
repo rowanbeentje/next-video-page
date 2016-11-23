@@ -1,4 +1,5 @@
 const logger = require('@financial-times/n-logger').default;
+const createError = require('http-errors');
 
 const query = id => {
 	return `{
@@ -18,7 +19,16 @@ module.exports = (req, res) => {
 			'X-Api-Key': process.env.NEXT_API_KEY
 		}
 	})
-		.then(response => response.json())
+		.then(response => {
+			if (response.ok) {
+				return response.json();
+			} else {
+				return response.text()
+					.then(text => {
+						throw createError(response.status, text);
+					})
+			}
+		})
 		.then(({ data: { search: [video] = [] } } = {}) => {
 			if (video) {
 				// NOTE: once all video content has the correct `url`, can just use `relativeUrl` here
@@ -30,7 +40,7 @@ module.exports = (req, res) => {
 			}
 		})
 		.catch(err => {
-			logger.error(err);
+			logger.error({ event: 'NEXT_API_RESPONSE_ERROR' }, err);
 			res.redirect('/videos');
 		});
 };
