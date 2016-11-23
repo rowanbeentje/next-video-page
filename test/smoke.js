@@ -13,6 +13,14 @@ module.exports = [{
 		'/videos/12345': {
 			status: 302,
 			redirect: '/videos'
+		},
+		'/videos/world': {
+			status: 302,
+			redirect: '/world'
+		},
+		'/videos/luce-talk': {
+			status: 302,
+			redirect: '/videos'
 		}
 	}
 }];
