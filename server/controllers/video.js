@@ -9,7 +9,7 @@ const query = id => {
 	}`;
 };
 
-module.exports = (req, res, next) => {
+module.exports = (req, res) => {
 	res.nextMetricsName = 'video';
 	const brightcoveId = req.params.id;
 	fetch(`https://next-api.ft.com/v1/query?query=${encodeURIComponent(query(brightcoveId))}&source=next-video-page`, {
