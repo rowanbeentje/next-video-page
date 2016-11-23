@@ -7,7 +7,7 @@ module.exports = [{
 			redirect: '/content/c382002a-a839-366c-9b5f-c3e51a25e05d'
 		},
 		'/videos/5220807225001/Trumps-mixed-message/World': {
-			status: 302,
+			status: 301,
 			redirect: '/content/c382002a-a839-366c-9b5f-c3e51a25e05d'
 		},
 		'/videos/12345': {
