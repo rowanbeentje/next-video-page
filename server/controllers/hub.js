@@ -63,7 +63,7 @@ const normaliseVideo = video => {
 };
 
 module.exports = (req, res, next) => {
-	res.nextMetricsName = 'video';
+	res.nextMetricsName = 'hub';
 	fetch(`https://next-api.ft.com/v1/query?query=${encodeURIComponent(query)}&source=next-video-page`, {
 		timeout: 3000,
 		headers: {

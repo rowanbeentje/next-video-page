@@ -4,6 +4,9 @@ TEST_APP := "ft-next-video-page-branch-${CIRCLE_BUILD_NUM}"
 
 test: verify
 
+test-smoke-local:
+	nht smoke local.ft.com:3002
+
 run:
 	nht run --https --local
 
