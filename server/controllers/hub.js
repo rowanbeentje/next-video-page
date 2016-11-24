@@ -28,8 +28,14 @@ const query = `
 
 	{
 		video {
-			editorsPicks(limit: 1) {
+			highlight: editorsPicks(limit: 1) {
 				bodyHTML
+				...teaserContent
+			}
+			editorsPicks(from: 1, limit: 4) {
+				...teaserContent
+			}
+			popular(limit: 4) {
 				...teaserContent
 			}
 		}
@@ -71,12 +77,20 @@ module.exports = (req, res, next) => {
 		}
 	})
 		.then(response => response.json())
-		.then(({ data: { video: { editorsPicks: [highlight] } = {}, latestVideos, markets, companies, world, lifeAndArts } = {} } = {}) => {
+		.then(({ data: { video: { highlight: [highlight], editorsPicks, popular } = {}, latestVideos, markets, companies, world, lifeAndArts } = {} } = {}) => {
 			const sections = [markets, companies, world, lifeAndArts].map(normaliseTag);
 			const slices = [
 				{
 					title: 'Latest',
 					videos: latestVideos.map(normaliseVideo)
+				},
+				{
+					title: 'Editor‘s Picks',
+					videos: editorsPicks.map(normaliseVideo)
+				},
+				{
+					title: 'Popular',
+					videos: popular.map(normaliseVideo)
 				},
 				...sections
 			];

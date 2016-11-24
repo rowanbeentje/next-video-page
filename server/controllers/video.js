@@ -3,9 +3,11 @@ const createError = require('http-errors');
 
 const query = id => {
 	return `{
-		search(termName: "webUrl", termValue:"http://video.ft.com/${id}", limit: 1) {
-			id
-			relativeUrl
+		video {
+			video(id: "${id}") {
+				id
+				relativeUrl
+			}
 		}
 	}`;
 };
@@ -29,7 +31,7 @@ module.exports = (req, res) => {
 					})
 			}
 		})
-		.then(({ data: { search: [video] = [] } } = {}) => {
+		.then(({ data: { video: { video } = {} } } = {}) => {
 			if (video) {
 				// NOTE: once all video content has the correct `url`, can just use `relativeUrl` here
 				// https://github.com/Financial-Times/next-es-interface/pull/605
