@@ -6,7 +6,9 @@
   "dependencies": {
     "@financial-times/n-express": "^17.16.1",
     "@financial-times/n-logger": "^5.4.6",
-    "forever": "^0.15.3"
+    "forever": "^0.15.3",
+    "ft-poller": "^2.8.1",
+    "http-errors": "^1.5.1"
   },
   "devDependencies": {
     "@financial-times/n-heroku-tools": "^6.14.10",
