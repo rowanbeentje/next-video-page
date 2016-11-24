@@ -1,16 +1,20 @@
-<div class="highlight o-grid-container" data-trackable="highlight">
+<div class="o-grid-container" data-trackable="highlight">
 	<div class="o-grid-row">
-		<div data-o-grid-colspan="12 M6">
-			<a href="{{highlight.url}}" data-trackable="image">
-				<img src="{{highlight.image.src}}" class="highlight__image" />
-			</a>
+		<div data-o-grid-colspan="12">
+			<h1 class="page-title">Videos</h1>
 		</div>
-		<div data-o-grid-colspan="12 M6">
-			<h2>
-				<a href="{{highlight.url}}" data-trackable="title">{{highlight.title}}</a>
-			</h2>
-			<div>{{{highlight.bodyHTML}}}</div>
-		</div>
+	</div>
+</div>
+
+<div class="highlight" data-trackable="highlight">
+	<a href="{{highlight.url}}" class="highlight__image-link" data-trackable="image">
+		<img src="{{highlight.image.src}}" class="highlight__image" />
+	</a>
+	<div class="highlight__explainer">
+		<h2 class="highlight__title">
+			<a href="{{highlight.url}}" class="highlight__title__link" data-trackable="title">{{highlight.title}}</a>
+		</h2>
+		<div class="highlight__body">{{{highlight.bodyHTML}}}</div>
 	</div>
 </div>
 
