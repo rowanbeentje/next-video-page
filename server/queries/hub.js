@@ -1,4 +1,4 @@
-module.exports =  `
+module.exports = `
 	fragment sliceContent on Tag {
 		prefLabel
 		relativeUrl
