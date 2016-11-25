@@ -2,6 +2,10 @@ const express = require('@financial-times/n-express');
 const path = require('path');
 
 const controllers = require('./controllers/index');
+const hubPoller = require('./pollers/hub');
+
+// start poller for data for the hub
+hubPoller.start();
 
 const app = express({
 	hasHeadCss: true,
