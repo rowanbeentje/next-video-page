@@ -6,82 +6,86 @@ $n-ui-output-critical: true;
 );
 @import 'n-ui/bootstrap';
 
-$o-video-is-silent: false;
-@import 'o-video/main';
-$o-teaser-is-silent: false;
-@import 'o-teaser/main';
-$o-teaser-collection-is-silent: false;
-@import 'o-teaser-collection/main';
+@include nUiCriticalStart();
+	$o-video-is-silent: false;
+	@import 'o-video/main';
+	$o-teaser-is-silent: false;
+	@import 'o-teaser/main';
+	$o-teaser-collection-is-silent: false;
+	@import 'o-teaser-collection/main';
 
-$o-image-is-silent: false;
-@import 'n-image/main';
+	$o-image-is-silent: false;
+	@import 'n-image/main';
 
-.page-title {
-	@include oTypographySerifDisplay(xl, $load-progressively: true);
-	margin: 15px 0 0;
-}
-
-.highlight {
-	display: flex;
-	max-width: 1340px;
-	margin: 35px auto;
-}
-
-.highlight__image-link,
-.highlight__explainer {
-	flex: 0 0 50%;
-}
-
-.n-image-wrapper,
-.highlight__image-link {
-	&:after {
-		content: '';
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:play?source=next-video-page&tint=%23FFFFFF,%23FFFFFF&format=svg');
-		background-color: #000000;
-		background-size: cover;
-		width: 15%;
-		height: 15% * (16 / 9);
+	.page-title {
+		@include oTypographySerifDisplay(xl, $load-progressively: true);
+		margin: 15px 0 0;
 	}
-}
 
-.highlight__image-link {
-	position: relative;
-	border-bottom: 0;
-}
+	.highlight {
+		display: flex;
+		max-width: 1340px;
+		margin: 35px auto;
+	}
 
-.highlight__image {
-	display: block;
-	width: 100%;
-}
+	.highlight__image-wrapper,
+	.highlight__explainer {
+		flex: 0 0 50%;
 
-.highlight__explainer {
-	background-color: #25282f;
-	padding: 20px;
-	box-sizing: border-box;
-}
+	}
 
-.highlight__title {
-	@include oTypographySansData(xl, $load-progressively: true);
-	// TODO: get on scale, or don't override
-	font-size: 52px !important;
-	line-height: 1em !important;
-	margin: 20px 0 0;
-}
+	.n-image-wrapper,
+	.highlight__image-link {
+		&:after {
+			content: '';
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:play?source=next-video-page&tint=%23FFFFFF,%23FFFFFF&format=svg');
+			background-color: #000000;
+			background-size: cover;
+			width: 15%;
+			height: 15% * (16 / 9);
+		}
+	}
 
-.highlight__title__link {
-	border-bottom: 0;
-	color: getColor('white');
+	.highlight__image-link {
+		display: block;
+		position: relative;
+		border-bottom: 0;
+	}
 
-	&:hover {
+	.highlight__image {
+		display: block;
+		width: 100%;
+	}
+
+	.highlight__explainer {
+		background-color: #25282f;
+		padding: 20px;
+		box-sizing: border-box;
+	}
+
+	.highlight__title {
+		@include oTypographySansData(xl, $load-progressively: true);
+		// TODO: get on scale, or don't override
+		font-size: 52px !important;
+		line-height: 1em !important;
+		margin: 20px 0 0;
+	}
+
+	.highlight__title__link {
+		border-bottom: 0;
 		color: getColor('white');
-	}
-}
 
-.highlight__body {
-	@include oTypographySansData(l, $load-progressively: true);
-	color: #a7a9ac;
-	margin: 20px 0 0;
-}
+		&:hover {
+			color: getColor('white');
+		}
+	}
+
+	.highlight__body {
+		@include oTypographySansData(l, $load-progressively: true);
+		color: #a7a9ac;
+		margin: 20px 0 0;
+	}
+@include nUiCriticalEnd();
