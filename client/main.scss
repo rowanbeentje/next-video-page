@@ -73,10 +73,12 @@ $n-ui-output-critical: true;
 
 	.highlight__title {
 		@include oTypographySansData(xl, $load-progressively: true);
-		// TODO: get on scale, or don't override
-		font-size: 52px !important;
-		line-height: 1em !important;
 		margin: 0;
+
+		@include oGridRespondTo(M) {
+			// TODO: get on scale, or don't override
+			@include oTypographyFallbackFontSize('sansData', 52px);
+		}
 	}
 
 	.highlight__title__link {
@@ -99,13 +101,25 @@ $n-ui-output-critical: true;
 
 	// o-teaser overrides - move into o-teaser
 .o-teaser__image-container {
-	@include oGridRespondTo($until: M) {
+	@include oGridRespondTo($until: S) {
+		flex-basis: 100% !important;
+		padding-right: 0 !important;
+	}
+
+	@include oGridRespondTo($from: S, $until: M) {
 		flex-basis: 50% !important;
+	}
+
+	@include oGridRespondTo($until: M) {
 		display: block !important;
 	}
 }
 .o-teaser__content {
-	@include oGridRespondTo($until: M) {
+	@include oGridRespondTo($until: S) {
+		flex-basis: 100% !important;
+	}
+
+	@include oGridRespondTo($from: S, $until: M) {
 		flex-basis: 50% !important;
 	}
 }

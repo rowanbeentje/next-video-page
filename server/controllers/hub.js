@@ -14,7 +14,20 @@ const normaliseVideo = video => {
 module.exports = (req, res, next) => {
 	res.nextMetricsName = 'hub';
 	hubPoller.getData()
-		.then(({ data: { video: { highlight: [highlight], editorsPicks, popular } = {}, latestVideos, markets, companies, world, lifeAndArts } = {} } = {}) => {
+		.then(({
+			data: {
+				video: {
+					highlight: [highlight],
+					editorsPicks,
+					popular
+				} = {},
+				latestVideos,
+				markets,
+				companies,
+				world,
+				lifeAndArts
+			} = {}
+		} = {}) => {
 			const sections = [markets, companies, world, lifeAndArts].map(normaliseTag);
 			const slices = [
 				{
