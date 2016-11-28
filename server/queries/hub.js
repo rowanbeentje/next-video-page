@@ -1,15 +1,15 @@
 module.exports = `
 	fragment sliceContent on Tag {
-		prefLabel
-		relativeUrl
-		latestContent(limit: 4, type: Video) {
+		title: prefLabel
+		url: relativeUrl
+		videos: latestContent(limit: 4, type: Video) {
 			...teaserContent
 		}
 	}
 
 	fragment teaserContent on Content {
-		id
 		title
+		url: relativeUrl
 		lastPublished
 		tag: teaserTag {
 			url
