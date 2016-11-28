@@ -1,4 +1,5 @@
 const express = require('@financial-times/n-express');
+const nHealth = require('n-health');
 const path = require('path');
 
 const controllers = require('./controllers/index');
@@ -7,9 +8,12 @@ const hubPoller = require('./pollers/hub');
 // start poller for data for the hub
 hubPoller.start();
 
+const healthChecks = nHealth(path.resolve(__dirname, 'config', 'health-checks'));
+
 const app = express({
 	hasHeadCss: true,
 	hasNUiBundle: true,
+	healthChecks: healthChecks.asArray(),
 	layoutsDir: path.join(process.cwd(), 'bower_components', 'n-ui', 'layout'),
 	systemCode: 'next-video-page',
 	withAnonMiddleware: true,
