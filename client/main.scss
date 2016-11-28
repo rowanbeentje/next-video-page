@@ -23,15 +23,12 @@ $n-ui-output-critical: true;
 	}
 
 	.highlight {
-		display: flex;
-		max-width: 1340px;
-		margin: 35px auto;
-	}
+		margin-top: 35px;
+		margin-bottom: 35px;
 
-	.highlight__image-wrapper,
-	.highlight__explainer {
-		flex: 0 0 50%;
-
+		@include oGridRespondTo(L) {
+			max-width: 1388px;
+		}
 	}
 
 	.n-image-wrapper,
@@ -63,15 +60,25 @@ $n-ui-output-critical: true;
 	.highlight__explainer {
 		background-color: #25282f;
 		padding: 20px;
-		box-sizing: border-box;
+		border-left: oGridGutter() solid getColor('pink');
+
+		@include oGridRespondTo(M) {
+			border-left-width: oGridGutter(M);
+		}
+
+		@include oGridRespondTo(L) {
+			border-left-width: 0;
+		}
 	}
 
 	.highlight__title {
 		@include oTypographySansData(xl, $load-progressively: true);
-		// TODO: get on scale, or don't override
-		font-size: 52px !important;
-		line-height: 1em !important;
-		margin: 20px 0 0;
+		margin: 0;
+
+		@include oGridRespondTo(M) {
+			// TODO: get on scale, or don't override
+			@include oTypographyFallbackFontSize('sansData', 52px);
+		}
 	}
 
 	.highlight__title__link {
@@ -86,6 +93,34 @@ $n-ui-output-critical: true;
 	.highlight__body {
 		@include oTypographySansData(l, $load-progressively: true);
 		color: #a7a9ac;
-		margin: 20px 0 0;
+
+		p {
+			margin: 20px 0 0;
+		}
 	}
+
+	// o-teaser overrides - move into o-teaser
+.o-teaser__image-container {
+	@include oGridRespondTo($until: S) {
+		flex-basis: 100% !important;
+		padding-right: 0 !important;
+	}
+
+	@include oGridRespondTo($from: S, $until: M) {
+		flex-basis: 50% !important;
+	}
+
+	@include oGridRespondTo($until: M) {
+		display: block !important;
+	}
+}
+.o-teaser__content {
+	@include oGridRespondTo($until: S) {
+		flex-basis: 100% !important;
+	}
+
+	@include oGridRespondTo($from: S, $until: M) {
+		flex-basis: 50% !important;
+	}
+}
 @include nUiCriticalEnd();

@@ -24,6 +24,9 @@ module.exports = `
 			height
 			ratio
 		}
+		... on Video {
+			duration
+		}
 	}
 
 	{
