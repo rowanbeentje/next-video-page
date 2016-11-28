@@ -8,7 +8,7 @@ test-smoke-local:
 	nht smoke local.ft.com:3002
 
 run:
-	nht run --https --local
+	nht run --https
 
 provision:
 	nht provision ${TEST_APP}

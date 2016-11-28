@@ -78,6 +78,7 @@ $n-ui-output-critical: true;
 		@include oGridRespondTo(M) {
 			// TODO: get on scale, or don't override
 			@include oTypographyFallbackFontSize('sansData', 52px);
+			line-height: 1em;
 		}
 	}
 
