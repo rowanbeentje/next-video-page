@@ -6,17 +6,19 @@
 	</div>
 </div>
 
-<div class="highlight" data-trackable="highlight">
-	<div class="highlight__image-wrapper">
-		<a href="{{highlight.url}}" class="highlight__image-link" data-trackable="image">
-			<img src="{{highlight.image.src}}" class="highlight__image" />
-		</a>
-	</div>
-	<div class="highlight__explainer">
-		<h2 class="highlight__title">
-			<a href="{{highlight.url}}" class="highlight__title__link" data-trackable="title">{{highlight.title}}</a>
-		</h2>
-		<div class="highlight__body">{{{highlight.bodyHTML}}}</div>
+<div class=" highlight o-grid-container">
+	<div class="o-grid-row">
+		<div class="highlight__image-wrapper" data-o-grid-colspan="12 L6">
+			<a href="{{highlight.url}}" class="highlight__image-link" data-trackable="image">
+				<img src="{{highlight.image.src}}" class="highlight__image" />
+			</a>
+		</div>
+		<div class="highlight__explainer" data-o-grid-colspan="12 L6">
+			<h2 class="highlight__title">
+				<a href="{{highlight.url}}" class="highlight__title__link" data-trackable="title">{{highlight.title}}</a>
+			</h2>
+			<div class="highlight__body">{{{highlight.bodyHTML}}}</div>
+		</div>
 	</div>
 </div>
 
