@@ -23,7 +23,7 @@
 </div>
 
 {{#each slices}}
-	<div class="o-teaser-collection o-grid-container">
+	<div class="carousel-container o-teaser-collection o-grid-container">
 		<h2 class="o-teaser-collection__heading o-teaser-collection__heading--half-width">
 			{{#if url}}
 				<a href="{{url}}" data-trackable="slice-title">{{title}}</a>
@@ -31,14 +31,16 @@
 				{{title}}
 			{{/if}}
 		</h2>
-		<div class="o-grid-row">
-			{{#each videos}}
-			<div data-o-grid-colspan="12 M6 L3">
-				{{>n-teaser/templates/heavy
-					mods=(array 'small' 'stacked')
-					position='{"default": "bottom"}'}}
+		<div class="carousel js-carousel">
+			<div class="carousel-inner o-grid-row">
+				{{#each videos}}
+					<div class="carousel__item" data-o-grid-colspan="6 L3">
+						{{>n-teaser/templates/heavy
+							mods=(array 'small' 'stacked')
+							position='{"default": "bottom"}'}}
+					</div>
+				{{/each}}
 			</div>
-			{{/each}}
 		</div>
 	</div>
 {{/each}}

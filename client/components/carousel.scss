@@ -1,0 +1,41 @@
+.carousel {
+}
+
+.carousel-inner {
+	transition-timing-function: ease;
+	transition-duration: 300ms;
+	flex-wrap: nowrap;
+}
+
+.carousel-arrow {
+	content: '';
+	width: 40px;
+	height: 40px;
+	position: absolute;
+	padding: 0;
+	z-index: 1;
+	background: transparent;
+	border: 0;
+
+	&:after {
+		content: '';
+	}
+}
+
+.carousel-arrow--previous {
+	left: -40px;
+	top: 50%;
+
+	&:after {
+		@include oIconsGetIcon('arrow-left', #000000, 40);
+	}
+}
+
+.carousel-arrow--next {
+	right: -40px;
+	top: 50%;
+
+	&:after {
+		@include oIconsGetIcon('arrow-right', #000000, 40);
+	}
+}

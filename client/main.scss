@@ -17,6 +17,8 @@ $n-ui-output-critical: true;
 	$o-image-is-silent: false;
 	@import 'n-image/main';
 
+	@import './components/carousel';
+
 	.page-title {
 		@include oTypographySerifDisplay(xl, $load-progressively: true);
 		margin: 15px 0 0;
@@ -105,27 +107,25 @@ $n-ui-output-critical: true;
 	}
 
 	// o-teaser overrides - move into o-teaser
-.o-teaser__image-container {
-	@include oGridRespondTo($until: S) {
-		flex-basis: 100% !important;
-		padding-right: 0 !important;
+	.o-teaser {
+		@include oGridRespondTo($until: M) {
+			border-bottom: 0;
+			padding-bottom: 0;
+		}
 	}
 
-	@include oGridRespondTo($from: S, $until: M) {
-		flex-basis: 50% !important;
+	.o-teaser__image-container {
+		@include oGridRespondTo($until: M) {
+			flex-basis: 100% !important;
+			display: block !important;
+			padding-top: 0 !important;
+			padding-right: 0 !important;
+		}
 	}
 
-	@include oGridRespondTo($until: M) {
-		display: block !important;
+	.o-teaser__content {
+		@include oGridRespondTo($until: M) {
+			flex-basis: 100% !important;
+		}
 	}
-}
-.o-teaser__content {
-	@include oGridRespondTo($until: S) {
-		flex-basis: 100% !important;
-	}
-
-	@include oGridRespondTo($from: S, $until: M) {
-		flex-basis: 50% !important;
-	}
-}
 @include nUiCriticalEnd();
