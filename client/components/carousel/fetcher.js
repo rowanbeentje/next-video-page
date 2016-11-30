@@ -24,7 +24,11 @@ const carouselFetcher = carouselId => {
 
 				${query}`
 			),
-			variables: JSON.stringify(Object.assign({}, variables, { from, limit: to - from })),
+			variables: JSON.stringify(Object.assign({}, variables, {
+				// offset editors-picks by one, as the first video goes in the hero slot
+				from: (carouselId === 'editors-picks') ? from + 1 : from,
+				limit: (carouselId === 'editors-picks') ? to - from + 1 : to - from,
+			})),
 			source: 'next-video-page-carousel'
 		};
 
