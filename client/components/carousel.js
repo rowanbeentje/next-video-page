@@ -22,6 +22,7 @@ class Carousel {
 		this.offset = 0;
 		const addArrowToCarousel = addArrow.bind(this, this.carouselEl);
 		['previous', 'next'].map(addArrowToCarousel);
+		this.updateInactiveItems();
 		carouselEl.setAttribute('data-carousel-js', '');
 	}
 
@@ -29,13 +30,17 @@ class Carousel {
 		return this.carouselInnerEl.offsetWidth;
 	}
 
+	getCarouselItems () {
+		return [...this.carouselInnerEl.querySelectorAll('.carousel__item')];
+	}
+
 	getNumberItems () {
-		return this.carouselInnerEl.querySelectorAll('.carousel__item').length;
+		return this.getCarouselItems().length;
 	}
 
 	getNumberVisibleItems () {
 		const carouselWidth = this.getCarouselWidth();
-		const carousleItemWidth = this.carouselInnerEl.querySelector('.carousel__item').offsetWidth;
+		const carousleItemWidth = this.getCarouselItems()[0].offsetWidth;
 		return Math.round(carouselWidth / carousleItemWidth);
 	}
 
@@ -55,6 +60,7 @@ class Carousel {
 		const from = this.position + this.getNumberVisibleItems();
 		const limit = Math.min(this.getNumberVisibleItems(), from + this.getNumberVisibleItems() - this.getNumberItems());
 		if (limit <= 0) {
+			this.updateInactiveItems();
 			return;
 		}
 		const query = `
@@ -79,7 +85,7 @@ class Carousel {
 					duration
 				}
 			}
-	
+
 			query ($tagId: String!, $from: Int!, $limit: Int!) {
 				tag(id: $tagId) {
 					videos: latestContent(from: $from, limit: $limit, type: Video) {
@@ -114,12 +120,13 @@ class Carousel {
 			})
 			.then(({ data: { tag: { videos = [] } = {} } }) => {
 				videos.forEach(this.addItem.bind(this));
+				this.updateInactiveItems();
 			});
 	}
 
 	addItem (data) {
 		const carouselItemEl = document.createElement('div');
-		carouselItemEl.classList.add('carousel__item');
+		carouselItemEl.classList.add('carousel__item', 'carousel__item--inactive');
 		carouselItemEl.setAttribute('data-o-grid-colspan', '6 L3');
 		const templateData = Object.assign({}, data, {
 			mods: ['small', 'stacked', 'video'],
@@ -130,7 +137,16 @@ class Carousel {
 		lazyLoadImages(carouselItemEl);
 		oDateInit(carouselItemEl);
 		return carouselItemEl;
-	};
+	}
+
+	updateInactiveItems () {
+		const carouselItems = this.getCarouselItems();
+		// remove existing inactive classes
+		[...carouselItems].forEach(carouselItemEl => carouselItemEl.classList.remove('carousel__item--inactive'));
+		// add inactive classes to all items not in 'view'
+		[...carouselItems.slice(0, this.position), ...carouselItems.slice(this.position + this.getNumberVisibleItems())]
+			.forEach(carouselItemEl => carouselItemEl.classList.add('carousel__item--inactive'));
+	}
 
 }
 

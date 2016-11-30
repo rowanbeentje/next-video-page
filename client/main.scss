@@ -34,6 +34,10 @@ $n-ui-output-critical: true;
 		}
 	}
 
+	.highlight__image-wrapper {
+		overflow: hidden;
+	}
+
 	.n-image-wrapper,
 	.highlight__image-link {
 		&:after {

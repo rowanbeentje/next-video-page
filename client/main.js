@@ -9,7 +9,7 @@ bootstrap(nUiConfig, () => {
 	OVideo.init();
 	lazyLoadImages();
 
-	const carousels = [...document.querySelectorAll('.js-carousel')]
+	[...document.querySelectorAll('.js-carousel')]
 		.map(carouselEl => {
 			return new Carousel(carouselEl);
 		});

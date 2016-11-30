@@ -7,7 +7,7 @@ module.exports = {
 				...teaserContent
 			}
 		}
-	
+
 		fragment teaserContent on Content {
 			title
 			url: relativeUrl
