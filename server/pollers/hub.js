@@ -54,7 +54,7 @@ class HubPoller {
 			.then(data => {
 				this.currentFetch = null;
 				if (data) {
-					this.data = data
+					this.data = data;
 				}
 				return this.data;
 			});

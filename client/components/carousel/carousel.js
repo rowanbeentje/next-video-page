@@ -98,7 +98,7 @@ class Carousel {
 		this.carouselEl.querySelector(`.carousel-arrow--${direction}`).removeAttribute('disabled');
 	}
 
-	toggleButton(direction, state) {
+	toggleButton (direction, state) {
 		this[`${state}Button`](direction);
 	}
 
