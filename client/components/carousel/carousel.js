@@ -25,10 +25,11 @@ class Carousel {
 		const addArrowToCarousel = addArrow.bind(this, this.carouselInnerEl);
 		['previous', 'next'].map(addArrowToCarousel);
 		this.carouselEl.setAttribute('data-carousel-js', '');
+		this.updateButtons();
 	}
 
 	getCarouselWidth () {
-		return this.carouselInnerEl.offsetWidth;
+		return this.carouselItemsEl.offsetWidth;
 	}
 
 	getItemWidth () {
@@ -36,7 +37,7 @@ class Carousel {
 	}
 
 	getItems () {
-		return [...this.carouselInnerEl.querySelectorAll('.carousel__item')];
+		return [...this.carouselItemsEl.querySelectorAll('.carousel__item')];
 	}
 
 	getNumberItems () {
@@ -50,16 +51,19 @@ class Carousel {
 	}
 
 	move (direction) {
-		console.log('#### MOVE');
-		if (this.offset === 0 && direction === 'previous') {
+		if (
+			(this.position === 0 && direction === 'previous') ||
+			(this.position === (this.getNumberItems() - 1) && direction === 'next')
+		) {
 			return;
+		} else {
+			const newPosition = this.position + (this.getNumberVisibleItems() * (direction === 'next' ? 1 : -1));
+			this.position = clamp(newPosition, 0, this.lastPagePosition());
+			this.offset = this.getItems()[this.position].offsetLeft + 1;
+			// this.offset = this.position * this.getCarouselWidth();
+			this.carouselItemsEl.style.transform = `translate(-${this.offset}px)`;
+			this.loadMoreItems();
 		}
-		const newPosition = this.position + (this.getNumberVisibleItems() * (direction === 'next' ? 1 : -1));
-		const positionUpperBound = this.getNumberItems() - this.getNumberVisibleItems();
-		this.position = clamp(newPosition, 0, positionUpperBound);
-		this.offset = this.position * this.getItemWidth();
-		this.carouselItemsEl.style.transform = `translate(-${this.offset}px)`;
-		this.loadMoreItems();
 	}
 
 	loadMoreItems () {
@@ -67,14 +71,14 @@ class Carousel {
 		this.fetcher(this)
 			.then((items = []) => {
 				items.forEach(this.addItem.bind(this));
-				this.enableButton('next');
+				this.updateButtons();
 			});
 	}
 
 	addItem (itemData) {
 		const carouselItemEl = document.createElement('div');
 		carouselItemEl.classList.add('carousel__item');
-		carouselItemEl.setAttribute('data-o-grid-colspan', '6 L3');
+		carouselItemEl.setAttribute('data-o-grid-colspan', '12 S6 L4 XL3');
 		const templateData = Object.assign({}, itemData, {
 			mods: ['small', 'stacked', 'video'],
 			position: { default: 'bottom' }
@@ -92,6 +96,19 @@ class Carousel {
 
 	enableButton (direction) {
 		this.carouselEl.querySelector(`.carousel-arrow--${direction}`).removeAttribute('disabled');
+	}
+
+	toggleButton(direction, state) {
+		this[`${state}Button`](direction);
+	}
+
+	updateButtons () {
+		this.toggleButton('previous', this.position === 0 ? 'disable' : 'enable');
+		this.toggleButton('next', this.position === this.lastPagePosition() ? 'disable' : 'enable');
+	}
+
+	lastPagePosition () {
+		return this.getNumberItems() - this.getNumberVisibleItems();
 	}
 
 }
