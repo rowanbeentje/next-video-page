@@ -15,7 +15,7 @@ class HubPoller {
 
 	start () {
 		this.update();
-		setInterval(this.update, this.refreshInterval);
+		setInterval(this.update.bind(this), this.refreshInterval);
 	}
 
 	update () {

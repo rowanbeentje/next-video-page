@@ -21,7 +21,7 @@
 	margin: 0;
 	padding: 0;
 	transition-timing-function: ease;
-	transition-duration: 300ms;
+	transition-duration: 0.3s;
 	flex-wrap: nowrap;
 }
 
@@ -36,6 +36,7 @@
 	z-index: 1;
 	background: transparent;
 	border: 0;
+	transition: opacity 0.5s;
 
 	@include oGridRespondTo(L) {
 		width: 5%;

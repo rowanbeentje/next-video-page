@@ -2,6 +2,16 @@ import * as queries from '../../../config/queries';
 import { teaserContent as teaserContentFragment } from '../../../config/fragments';
 import { stringify } from '../../utils/querystring';
 
+const addTeaserType = video => {
+	let type = '';
+	if (video.isOpinion) {
+		type = 'opinion';
+	} else if (video.isEditorsChoice) {
+		type = 'editors-pick';
+	}
+	return Object.assign({}, video, { type });
+};
+
 const carouselFetcher = carouselId => {
 	let query;
 	const variables = {};
@@ -56,7 +66,8 @@ const carouselFetcher = carouselId => {
 					default:
 						return data.section.videos;
 				}
-			});
+			})
+			.then(videos => videos.map(addTeaserType));
 	};
 };
 

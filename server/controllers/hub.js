@@ -7,6 +7,16 @@ const addTrackingId = item => {
 	return Object.assign({}, item, { trackingId });
 };
 
+const addTeaserType = video => {
+	let type = '';
+	if (video.isOpinion) {
+		type = 'opinion';
+	} else if (video.isEditorsChoice) {
+		type = 'editors-pick';
+	}
+	return Object.assign({}, video, { type });
+};
+
 module.exports = (req, res, next) => {
 	res.nextMetricsName = 'hub';
 	hubPoller.getData()
@@ -44,7 +54,11 @@ module.exports = (req, res, next) => {
 				...sections
 			]
 				.filter(({ videos = [] } = {}) => videos.length)
-				.map(addTrackingId);
+				.map(addTrackingId)
+				.map(slice => {
+					const videos = slice.videos.map(addTeaserType);
+					return Object.assign({}, slice, { videos })
+				});
 			res.render('hub', {
 				layout: 'wrapper',
 				title: 'Financial Times | Videos',
