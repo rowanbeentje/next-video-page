@@ -33,14 +33,16 @@
 				{{/if}}
 			</h2>
 			<div class="carousel js-carousel" id="{{id}}">
-				<div class="carousel-inner o-grid-row">
-					{{#each videos}}
-						<div class="carousel__item" data-o-grid-colspan="6 L3">
-							{{>n-teaser/templates/heavy
-								mods=(array 'small' 'stacked' 'video')
-								position='{"default": "bottom"}'}}
-						</div>
-					{{/each}}
+				<div class="carousel-inner">
+					<ol class="carousel__items o-grid-row">
+						{{#each videos}}
+							<li class="carousel__item" data-o-grid-colspan="12 S6 L3">
+								{{>n-teaser/templates/heavy
+									mods=(array 'small' 'stacked' 'video')
+									position='{"default": "bottom"}'}}
+							</li>
+						{{/each}}
+					</ol>
 				</div>
 			</div>
 		</div>

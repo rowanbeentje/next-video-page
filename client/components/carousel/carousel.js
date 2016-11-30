@@ -7,7 +7,7 @@ const addArrow = function (el, direction) {
 	arrowEl.classList.add('carousel-arrow', `carousel-arrow--${direction}`);
 	arrowEl.setAttribute('data-trackable', direction);
 	arrowEl.addEventListener('click', this.move.bind(this, direction));
-	el.parentNode.appendChild(arrowEl);
+	el.appendChild(arrowEl);
 	return arrowEl;
 };
 
@@ -17,13 +17,14 @@ class Carousel {
 
 	constructor (carouselEl, { fetcher } = {}) {
 		this.carouselEl = carouselEl;
-		this.carouselInnerEl = carouselEl.querySelector('.carousel-inner');
+		this.carouselInnerEl = this.carouselEl.querySelector('.carousel-inner');
+		this.carouselItemsEl = this.carouselEl.querySelector('.carousel__items');
 		this.fetcher = fetcher;
 		this.position = 0;
 		this.offset = 0;
-		const addArrowToCarousel = addArrow.bind(this, this.carouselEl);
+		const addArrowToCarousel = addArrow.bind(this, this.carouselInnerEl);
 		['previous', 'next'].map(addArrowToCarousel);
-		carouselEl.setAttribute('data-carousel-js', '');
+		this.carouselEl.setAttribute('data-carousel-js', '');
 	}
 
 	getCarouselWidth () {
@@ -49,6 +50,7 @@ class Carousel {
 	}
 
 	move (direction) {
+		console.log('#### MOVE');
 		if (this.offset === 0 && direction === 'previous') {
 			return;
 		}
@@ -56,30 +58,40 @@ class Carousel {
 		const positionUpperBound = this.getNumberItems() - this.getNumberVisibleItems();
 		this.position = clamp(newPosition, 0, positionUpperBound);
 		this.offset = this.position * this.getItemWidth();
-		this.carouselInnerEl.style.transform = `translate(-${this.offset}px)`;
+		this.carouselItemsEl.style.transform = `translate(-${this.offset}px)`;
 		this.loadMoreItems();
 	}
 
 	loadMoreItems () {
+		this.disableButton('next');
 		this.fetcher(this)
 			.then((items = []) => {
 				items.forEach(this.addItem.bind(this));
+				this.enableButton('next');
 			});
 	}
 
 	addItem (itemData) {
 		const carouselItemEl = document.createElement('div');
-		carouselItemEl.classList.add('carousel__item', 'carousel__item--inactive');
+		carouselItemEl.classList.add('carousel__item');
 		carouselItemEl.setAttribute('data-o-grid-colspan', '6 L3');
 		const templateData = Object.assign({}, itemData, {
 			mods: ['small', 'stacked', 'video'],
 			position: { default: 'bottom' }
 		});
 		carouselItemEl.innerHTML = nTeaserHeavyTemplate(templateData);
-		this.carouselInnerEl.appendChild(carouselItemEl);
+		this.carouselItemsEl.appendChild(carouselItemEl);
 		lazyLoadImages(carouselItemEl);
 		oDateInit(carouselItemEl);
 		return carouselItemEl;
+	}
+
+	disableButton (direction) {
+		this.carouselEl.querySelector(`.carousel-arrow--${direction}`).setAttribute('disabled', '');
+	}
+
+	enableButton (direction) {
+		this.carouselEl.querySelector(`.carousel-arrow--${direction}`).removeAttribute('disabled');
 	}
 
 }
