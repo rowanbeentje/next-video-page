@@ -1,0 +1,26 @@
+// o-teaser overrides - move into o-teaser
+.o-teaser--video {
+	@include oGridRespondTo($until: M) {
+		border-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	.o-teaser__image-container {
+		@include oGridRespondTo($until: M) {
+			flex-basis: 100%;
+			display: block;
+			padding-top: 0;
+			padding-right: 0;
+		}
+	}
+
+	.o-teaser__content {
+		@include oGridRespondTo($until: M) {
+			flex-basis: 100%;
+		}
+	}
+
+	.n-image-wrapper {
+		overflow: hidden;
+	}
+}

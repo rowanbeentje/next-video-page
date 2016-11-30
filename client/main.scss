@@ -17,6 +17,7 @@ $n-ui-output-critical: true;
 	$o-image-is-silent: false;
 	@import 'n-image/main';
 
+	@import './o-teaser';
 	@import './components/carousel';
 
 	.page-title {
@@ -103,29 +104,6 @@ $n-ui-output-critical: true;
 
 		p {
 			margin: 20px 0 0;
-		}
-	}
-
-	// o-teaser overrides - move into o-teaser
-	.o-teaser {
-		@include oGridRespondTo($until: M) {
-			border-bottom: 0;
-			padding-bottom: 0;
-		}
-	}
-
-	.o-teaser__image-container {
-		@include oGridRespondTo($until: M) {
-			flex-basis: 100% !important;
-			display: block !important;
-			padding-top: 0 !important;
-			padding-right: 0 !important;
-		}
-	}
-
-	.o-teaser__content {
-		@include oGridRespondTo($until: M) {
-			flex-basis: 100% !important;
 		}
 	}
 @include nUiCriticalEnd();

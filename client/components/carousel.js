@@ -1,4 +1,6 @@
 import nTeaserHeavyTemplate from 'n-teaser/templates/heavy.html';
+import { lazyLoad as lazyLoadImages } from 'n-image';
+import { init as oDateInit } from 'o-date';
 
 import { stringify } from '../utils/querystring';
 
@@ -120,11 +122,13 @@ class Carousel {
 		carouselItemEl.classList.add('carousel__item');
 		carouselItemEl.setAttribute('data-o-grid-colspan', '6 L3');
 		const templateData = Object.assign({}, data, {
-			mods: ['small', 'stacked'],
+			mods: ['small', 'stacked', 'video'],
 			position: { default: 'bottom' }
 		});
 		carouselItemEl.innerHTML = nTeaserHeavyTemplate(templateData);
 		this.carouselInnerEl.appendChild(carouselItemEl);
+		lazyLoadImages(carouselItemEl);
+		oDateInit(carouselItemEl);
 		return carouselItemEl;
 	};
 
