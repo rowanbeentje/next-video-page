@@ -12,7 +12,12 @@ const carouselFetcher = carouselId => {
 		variables.tag = carouselId;
 	}
 
-	return (carousel, from, limit) => {
+	return carousel => {
+		const from = carousel.position + carousel.getNumberVisibleItems();
+		const limit = from + carousel.getNumberVisibleItems() - carousel.getNumberItems();
+		if (limit <= 0) {
+			return Promise.resolve();
+		}
 		const qs = {
 			query: encodeURIComponent(`
 				${teaserContentFragment}

@@ -11,12 +11,14 @@ const addArrow = function (el, direction) {
 	return arrowEl;
 };
 
+const clamp = (number, lower, upper) => Math.min(Math.max(number, lower), upper);
+
 class Carousel {
 
 	constructor (carouselEl, { fetcher } = {}) {
 		this.carouselEl = carouselEl;
-		this.fetcher = fetcher;
 		this.carouselInnerEl = carouselEl.querySelector('.carousel-inner');
+		this.fetcher = fetcher;
 		this.position = 0;
 		this.offset = 0;
 		const addArrowToCarousel = addArrow.bind(this, this.carouselEl);
@@ -28,39 +30,39 @@ class Carousel {
 		return this.carouselInnerEl.offsetWidth;
 	}
 
-	getCarouselItems () {
+	getItemWidth () {
+		return this.getItems()[0].offsetWidth;
+	}
+
+	getItems () {
 		return [...this.carouselInnerEl.querySelectorAll('.carousel__item')];
 	}
 
 	getNumberItems () {
-		return this.getCarouselItems().length;
+		return this.getItems().length;
 	}
 
 	getNumberVisibleItems () {
 		const carouselWidth = this.getCarouselWidth();
-		const carousleItemWidth = this.getCarouselItems()[0].offsetWidth;
+		const carousleItemWidth = this.getItems()[0].offsetWidth;
 		return Math.round(carouselWidth / carousleItemWidth);
 	}
 
 	move (direction) {
-		if (this.offset === 0 && direction === 'previous') {
+		if (
+			(this.offset === 0 && direction === 'previous') ||
+			(this.position === (this.getNumberItems() - 1) && direction === 'next')
+		) {
 			return;
 		}
-		// get the amount (and direction) to move the carousel
-		const carouselVector = this.getCarouselWidth() * (direction === 'next' ? -1 : 1);
-		this.offset = Math.min(0, this.offset + carouselVector);
-		this.position = Math.max(0, this.position + (this.getNumberVisibleItems() * (direction === 'next' ? 1 : -1)));
-		this.carouselInnerEl.style.transform = `translate(${this.offset}px)`;
+		this.position = clamp(this.position + (this.getNumberVisibleItems() * (direction === 'next' ? 1 : -1)), 0, this.getNumberItems() - 1);
+		this.offset = this.position * this.getItemWidth();
+		this.carouselInnerEl.style.transform = `translate(-${this.offset}px)`;
 		this.loadMoreItems();
 	}
 
 	loadMoreItems () {
-		const from = this.position + this.getNumberVisibleItems();
-		const limit = Math.min(this.getNumberVisibleItems(), from + this.getNumberVisibleItems() - this.getNumberItems());
-		if (limit <= 0) {
-			return;
-		}
-		this.fetcher(this, from, limit)
+		this.fetcher(this)
 			.then((items = []) => {
 				items.forEach(this.addItem.bind(this));
 			});
