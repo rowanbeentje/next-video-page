@@ -1,16 +1,23 @@
 const hubPoller = require('../pollers/hub');
 
+const addTrackingId = item => {
+	const trackingId = item.title.toLowerCase()
+		.replace(/[^\s\w]/g, '')
+		.replace(/\s+/g, '-');
+	return Object.assign({}, item, { trackingId });
+};
+
 module.exports = (req, res, next) => {
 	res.nextMetricsName = 'hub';
 	hubPoller.getData()
 		.then(({
 			data: {
 				video: {
-					highlight: [highlight] = [],
+					hero: [hero] = [],
 					editorsPicks = [],
 					popular = []
 				} = {},
-				latestVideos = [],
+				latest = [],
 				markets = {},
 				companies = {},
 				world = {},
@@ -21,23 +28,27 @@ module.exports = (req, res, next) => {
 			const slices = [
 				{
 					title: 'Latest',
-					videos: latestVideos
+					id: 'latest',
+					videos: latest
 				},
 				{
 					title: 'Editor‘s Picks',
+					id: 'editors-picks',
 					videos: editorsPicks
 				},
 				{
 					title: 'Popular',
+					id: 'popular',
 					videos: popular
 				},
 				...sections
 			]
-				.filter(({ videos = [] } = {}) => videos.length);
+				.filter(({ videos = [] } = {}) => videos.length)
+				.map(addTrackingId);
 			res.render('hub', {
 				layout: 'wrapper',
 				title: 'Financial Times | Videos',
-				highlight,
+				hero,
 				slices
 			});
 		})

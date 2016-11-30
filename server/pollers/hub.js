@@ -2,7 +2,8 @@ const logger = require('@financial-times/n-logger');
 const createError = require('http-errors');
 const querystring = require('querystring');
 
-const hubQuery = require('../queries/hub');
+const hubQuery = require('../../config/queries/hub');
+const queryFragments = require('../../config/fragments');
 
 class HubPoller {
 
@@ -22,8 +23,15 @@ class HubPoller {
 			return this.currentFetch;
 		}
 		const qs = querystring.stringify({
-			query: hubQuery.query,
-			variables: JSON.stringify(hubQuery.variables),
+			query: `
+				${queryFragments.sliceContent}
+				${queryFragments.teaserContent}
+
+				${hubQuery}
+			`,
+			variables: JSON.stringify({
+				limit: 8
+			}),
 			source: 'next-video-page'
 		});
 		return this.currentFetch = fetch(`https://next-api.ft.com/v1/query?${qs}`, {

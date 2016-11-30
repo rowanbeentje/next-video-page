@@ -7,6 +7,7 @@ $n-ui-output-critical: true;
 @import 'n-ui/bootstrap';
 
 @include nUiCriticalStart();
+
 	$o-video-is-silent: false;
 	@import 'o-video/main';
 	$o-teaser-is-silent: false;
@@ -17,97 +18,13 @@ $n-ui-output-critical: true;
 	$o-image-is-silent: false;
 	@import 'n-image/main';
 
-	@import './o-teaser';
-	@import './components/carousel';
+	@import 'components/o-teaser';
+	@import 'components/hero';
+	@import 'components/carousel/carousel';
 
 	.page-title {
 		@include oTypographySerifDisplay(xl, $load-progressively: true);
 		margin: 15px 0 0;
 	}
 
-	.highlight {
-		margin-top: 35px;
-		margin-bottom: 35px;
-
-		@include oGridRespondTo(L) {
-			max-width: 1388px;
-		}
-	}
-
-	.highlight__image-wrapper {
-		overflow: hidden;
-	}
-
-	.n-image-wrapper,
-	.highlight__image-link {
-		&:after {
-			content: '';
-			position: absolute;
-			bottom: 0;
-			left: 0;
-			background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:play?source=next-video-page&tint=%23FFFFFF,%23FFFFFF&format=svg');
-			background-color: #000000;
-			background-size: cover;
-			width: 15%;
-			height: 15% * (16 / 9);
-		}
-	}
-
-	.highlight__image-link {
-		display: block;
-		position: relative;
-		border-bottom: 0;
-		padding-bottom: 56.25%;
-	}
-
-	.highlight__image {
-		display: block;
-		position: absolute;
-		width: 100%;
-		top: 0;
-		left: 0;
-	}
-
-	.highlight__explainer {
-		background-color: #25282f;
-		padding: 20px;
-		border-left: oGridGutter() solid getColor('pink');
-
-		@include oGridRespondTo(M) {
-			border-left-width: oGridGutter(M);
-		}
-
-		@include oGridRespondTo(L) {
-			border-left-width: 0;
-		}
-	}
-
-	.highlight__title {
-		@include oTypographySansData(xl, $load-progressively: true);
-		margin: 0;
-
-		@include oGridRespondTo(M) {
-			// TODO: get on scale, or don't override
-			@include oTypographyFallbackFontSize('sansData', 52px);
-			line-height: 1em;
-		}
-	}
-
-	.highlight__title__link {
-		border-bottom: 0;
-		color: getColor('white');
-
-		&:hover {
-			color: getColor('white');
-		}
-	}
-
-	.highlight__body {
-		@include oTypographySansData(l, $load-progressively: true);
-		color: #a7a9ac;
-
-		p {
-			margin: 20px 0 0;
-		}
-	}
 @include nUiCriticalEnd();
