@@ -13,9 +13,9 @@ const carouselFetcher = carouselId => {
 	}
 
 	return carousel => {
-		const from = carousel.position + carousel.getNumberVisibleItems();
-		const limit = from + carousel.getNumberVisibleItems() - carousel.getNumberItems();
-		if (limit <= 0) {
+		const from = Math.min(carousel.position + carousel.getNumberVisibleItems(), carousel.getNumberItems());
+		const to = carousel.position + (carousel.getNumberVisibleItems() * 2);
+		if (from < carousel.getNumberItems()) {
 			return Promise.resolve();
 		}
 		const qs = {
@@ -24,7 +24,7 @@ const carouselFetcher = carouselId => {
 
 				${query}`
 			),
-			variables: JSON.stringify(Object.assign({}, variables, { from, limit })),
+			variables: JSON.stringify(Object.assign({}, variables, { from, limit: to - from })),
 			source: 'next-video-page-carousel'
 		};
 

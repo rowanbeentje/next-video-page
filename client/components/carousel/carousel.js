@@ -7,7 +7,7 @@ const addArrow = function (el, direction) {
 	arrowEl.classList.add('carousel-arrow', `carousel-arrow--${direction}`);
 	arrowEl.setAttribute('data-trackable', direction);
 	arrowEl.addEventListener('click', this.move.bind(this, direction));
-	el.appendChild(arrowEl);
+	el.parentNode.appendChild(arrowEl);
 	return arrowEl;
 };
 
@@ -49,13 +49,12 @@ class Carousel {
 	}
 
 	move (direction) {
-		if (
-			(this.offset === 0 && direction === 'previous') ||
-			(this.position === (this.getNumberItems() - 1) && direction === 'next')
-		) {
+		if (this.offset === 0 && direction === 'previous') {
 			return;
 		}
-		this.position = clamp(this.position + (this.getNumberVisibleItems() * (direction === 'next' ? 1 : -1)), 0, this.getNumberItems() - 1);
+		const newPosition = this.position + (this.getNumberVisibleItems() * (direction === 'next' ? 1 : -1));
+		const positionUpperBound = this.getNumberItems() - this.getNumberVisibleItems();
+		this.position = clamp(newPosition, 0, positionUpperBound);
 		this.offset = this.position * this.getItemWidth();
 		this.carouselInnerEl.style.transform = `translate(-${this.offset}px)`;
 		this.loadMoreItems();
