@@ -1,44 +1,48 @@
 <div class="o-grid-container">
 	<div class="o-grid-row">
 		<div data-o-grid-colspan="12">
-			<h1 class="page-title">Videos</h1>
+			<h1 class="page-title">Video</h1>
 		</div>
 	</div>
 </div>
 
-<div class=" highlight o-grid-container">
+<div class="hero o-grid-container" data-trackable="hero">
 	<div class="o-grid-row">
-		<div class="highlight__image-wrapper" data-o-grid-colspan="12 L6">
-			<a href="{{highlight.url}}" class="highlight__image-link" data-trackable="image">
-				<img src="{{highlight.image.src}}" class="highlight__image" />
+		<div class="hero__image-wrapper" data-o-grid-colspan="12 L6">
+			<a href="{{hero.url}}" class="hero__image-link" data-trackable="image">
+				<img src="{{hero.image.src}}" class="hero__image" />
 			</a>
 		</div>
-		<div class="highlight__explainer" data-o-grid-colspan="12 L6">
-			<h2 class="highlight__title">
-				<a href="{{highlight.url}}" class="highlight__title__link" data-trackable="title">{{highlight.title}}</a>
+		<div class="hero__explainer" data-o-grid-colspan="12 L6">
+			<h2 class="hero__title">
+				<a href="{{hero.url}}" class="hero__title__link" data-trackable="title">{{hero.title}}</a>
 			</h2>
-			<div class="highlight__body">{{{highlight.bodyHTML}}}</div>
+			<div class="hero__body">{{{hero.bodyHTML}}}</div>
 		</div>
 	</div>
 </div>
 
-{{#each slices}}
-	<div class="o-teaser-collection o-grid-container">
-		<h2 class="o-teaser-collection__heading o-teaser-collection__heading--half-width">
-			{{#if url}}
-				<a href="{{url}}" data-trackable="slice-title">{{title}}</a>
-			{{else}}
-				{{title}}
-			{{/if}}
-		</h2>
-		<div class="o-grid-row">
-			{{#each videos}}
-			<div data-o-grid-colspan="12 M6 L3">
-				{{>n-teaser/templates/heavy
-					mods=(array 'small' 'stacked')
-					position='{"default": "bottom"}'}}
+<div data-trackable="slices">
+	{{#each slices}}
+		<div class="o-teaser-collection o-grid-container" data-trackable="{{trackingId}}">
+			<h2 class="o-teaser-collection__heading o-teaser-collection__heading--half-width">
+				{{#if url}}
+					<a href="{{url}}" data-trackable="title">{{title}}</a>
+				{{else}}
+					{{title}}
+				{{/if}}
+			</h2>
+			<div class="carousel js-carousel" id="{{id}}">
+				<div class="carousel-inner o-grid-row">
+					{{#each videos}}
+						<div class="carousel__item" data-o-grid-colspan="6 L3">
+							{{>n-teaser/templates/heavy
+								mods=(array 'small' 'stacked' 'video')
+								position='{"default": "bottom"}'}}
+						</div>
+					{{/each}}
+				</div>
 			</div>
-			{{/each}}
 		</div>
-	</div>
-{{/each}}
+	{{/each}}
+</div>
