@@ -13,7 +13,7 @@ module.exports = `
 			prefLabel
 		}
 		image: mainImage {
-			src: rawSrc
+			url: rawSrc
 			width
 			height
 			ratio

@@ -25,9 +25,6 @@ const video = express({
 	withNavigation: true
 });
 
-app.get('/__gtg', controllers.gtg);
-app.use('/video', video);
-
 video.get('/', controllers.hub);
 /**
  * Handle moving traffic over from the old video.ft.com site, e.g urls of the format
@@ -40,6 +37,9 @@ video.get('/:id(\\d+)*?', controllers.video);
  * Currently acting as a catch all while we redirect traffic from video.ft.com
  */
 video.get('/*', controllers.section);
+
+app.get('/__gtg', controllers.gtg);
+app.use('/video', video);
 
 const listen = app.listen(process.env.PORT || 3001);
 

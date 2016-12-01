@@ -19,6 +19,7 @@ const addTeaserType = video => {
 
 module.exports = (req, res, next) => {
 	res.nextMetricsName = 'hub';
+	const useLatestHeroStyling = 'latest-hero-styling' in req.query;
 	hubPoller.getData()
 		.then(({
 			data: {
@@ -62,7 +63,8 @@ module.exports = (req, res, next) => {
 			res.render('hub', {
 				layout: 'wrapper',
 				title: 'Financial Times | Videos',
-				hero,
+				useLatestHeroStyling,
+				hero: addTeaserType(hero),
 				slices
 			});
 		})
