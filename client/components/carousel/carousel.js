@@ -4,7 +4,7 @@ import { init as oDateInit } from 'o-date';
 
 const addArrow = function (el, direction) {
 	const arrowEl = document.createElement('button');
-	// NOTE: classList polyfill doesn't accept multiple arguments to add
+	// NOTE: classList polyfill doesn't accept multiple arguments to `add`
 	['carousel-arrow', `carousel-arrow--${direction}`].forEach(classItem => arrowEl.classList.add(classItem));
 	arrowEl.setAttribute('data-trackable', direction);
 	arrowEl.addEventListener('click', this.move.bind(this, direction));
@@ -61,9 +61,9 @@ class Carousel {
 			const newPosition = this.position + (this.getNumberVisibleItems() * (direction === 'next' ? 1 : -1));
 			this.position = clamp(newPosition, 0, this.lastPagePosition());
 			this.offset = this.getItems()[this.position].offsetLeft + 1;
-			// this.offset = this.position * this.getCarouselWidth();
-			this.carouselItemsEl.style.transform = `translate(-${this.offset}px)`;
-			this.carouselItemsEl.style.msTransform = `translate(-${this.offset}px)`;
+			const transformValue = `translate(-${this.offset}px)`;
+			this.carouselItemsEl.style.transform = transformValue;
+			this.carouselItemsEl.style.msTransform = transformValue;
 			this.loadMoreItems();
 		}
 	}
