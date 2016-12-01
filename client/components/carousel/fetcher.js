@@ -1,3 +1,5 @@
+import { broadcast } from 'n-ui/utils'
+
 import * as queries from '../../../config/queries';
 import { teaserContent as teaserContentFragment } from '../../../config/fragments';
 import { stringify } from '../../utils/querystring';
@@ -51,7 +53,7 @@ const carouselFetcher = carouselId => {
 				} else {
 					return response.text()
 						.then(text => {
-							throw new Error(`Unable to fetch carousel items: ${text}`);
+							throw new Error(`Fail fetching data from next-api with "${text}" (${response.status})`);
 						});
 				}
 			})
@@ -67,7 +69,15 @@ const carouselFetcher = carouselId => {
 						return data.section.videos;
 				}
 			})
-			.then(videos => videos.map(addTeaserType));
+			.then(videos => videos.map(addTeaserType))
+			.catch(err => {
+				broadcast('oErrors.log', {
+					error: err,
+					info: {
+						message: 'Failed fetching data for carousel'
+					}
+				});
+			});
 	};
 };
 

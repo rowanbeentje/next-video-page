@@ -63,6 +63,7 @@ class Carousel {
 			this.offset = this.getItems()[this.position].offsetLeft + 1;
 			// this.offset = this.position * this.getCarouselWidth();
 			this.carouselItemsEl.style.transform = `translate(-${this.offset}px)`;
+			this.carouselItemsEl.style.msTransform = `translate(-${this.offset}px)`;
 			this.loadMoreItems();
 		}
 	}
