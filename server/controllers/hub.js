@@ -14,7 +14,7 @@ const addTeaserType = video => {
 	} else if (video.isEditorsChoice) {
 		type = 'editors-pick';
 	}
-	return Object.assign({}, video, { type });
+	return Object.assign({}, video, { type, srcSet: ['foo.jpg'] });
 };
 
 module.exports = (req, res, next) => {

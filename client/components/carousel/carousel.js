@@ -83,7 +83,9 @@ class Carousel {
 		carouselItemEl.setAttribute('data-o-grid-colspan', '12 S6 L4 XL3');
 		const templateData = Object.assign({}, itemData, {
 			mods: ['small', 'stacked', 'video'],
-			position: { default: 'bottom' }
+			position: { default: 'bottom' },
+			widths: [172, 254, 352],
+			colspan: { default: 12, S: 6, L: 4, XL: 3 }
 		});
 		carouselItemEl.innerHTML = nTeaserHeavyTemplate(templateData);
 		this.carouselItemsEl.appendChild(carouselItemEl);

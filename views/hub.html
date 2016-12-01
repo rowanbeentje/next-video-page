@@ -14,7 +14,9 @@
 				<div class="hero-v2--overlay o-grid-container">
 					<div class="o-grid-row">
 						<div class="hero-v2--info" data-o-grid-colspan="12">
-							<h3 class="hero-v2__tag">{{tag.name}}</h3>
+							{{#if tag}}
+								<h3 class="hero-v2__tag">{{tag.name}}</h3>
+							{{/if}}
 							<h2 class="hero-v2__title">{{title}}</h2>
 						</div>
 					</div>
@@ -57,7 +59,9 @@
 							<li class="carousel__item" data-o-grid-colspan="12 S6 L4 XL3">
 								{{>n-teaser/templates/heavy
 									mods=(array 'small' 'stacked' 'video')
-									position='{"default": "bottom"}'}}
+									position='{ "default": "bottom" }'
+									widths=(array 172 254 352)
+									colspan='{ "default": 12, "S": 6, "L": 4, "XL": 3 }'}}
 							</li>
 						{{/each}}
 					</ol>
