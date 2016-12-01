@@ -14,11 +14,12 @@ const addTeaserType = video => {
 	} else if (video.isEditorsChoice) {
 		type = 'editors-pick';
 	}
-	return Object.assign({}, video, { type });
+	return Object.assign({}, video, { type, tag: { name: 'World'} });
 };
 
 module.exports = (req, res, next) => {
 	res.nextMetricsName = 'hub';
+	const latestHeroStyling = 'latest-hero-styling' in req.query;
 	hubPoller.getData()
 		.then(({
 			data: {
@@ -62,7 +63,8 @@ module.exports = (req, res, next) => {
 			res.render('hub', {
 				layout: 'wrapper',
 				title: 'Financial Times | Videos',
-				hero,
+				latestHeroStyling,
+				hero: addTeaserType(hero),
 				slices
 			});
 		})

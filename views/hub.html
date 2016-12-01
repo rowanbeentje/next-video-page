@@ -6,21 +6,39 @@
 	</div>
 </div>
 
-<div class="hero o-grid-container" data-trackable="hero">
-	<div class="o-grid-row">
-		<div class="hero__image-wrapper" data-o-grid-colspan="12 L6">
-			<a href="{{hero.url}}" class="hero__image-link" data-trackable="image">
-				<img src="{{hero.image.src}}" class="hero__image" />
+{{#with hero}}
+	{{#if ../latestHeroStyling}}
+		<div class="hero-v2" data-trackable="hero">
+			<a href="{{url}}" class="hero-v2__link" data-trackable="link">
+				<img src="https://www.ft.com/__origami/service/image/v2/images/raw/{{encode image.src}}?source=next-video-page&amp;width=1440&amp;height=480" class="hero-v2__image" />
+				<div class="hero-v2--overlay o-grid-container">
+					<div class="o-grid-row">
+						<div class="hero-v2--info" data-o-grid-colspan="12">
+							<h3 class="hero-v2__tag">{{tag.name}}</h3>
+							<h2 class="hero-v2__title">{{title}}</h2>
+						</div>
+					</div>
+				</div>
 			</a>
 		</div>
-		<div class="hero__explainer" data-o-grid-colspan="12 L6">
-			<h2 class="hero__title">
-				<a href="{{hero.url}}" class="hero__title__link" data-trackable="title">{{hero.title}}</a>
-			</h2>
-			<div class="hero__body">{{{hero.bodyHTML}}}</div>
+	{{else}}
+		<div class="hero o-grid-container" data-trackable="hero">
+			<div class="o-grid-row">
+				<div class="hero__image-wrapper" data-o-grid-colspan="12 L6">
+					<a href="{{url}}" class="hero__image-link" data-trackable="image">
+						<img src="https://www.ft.com/__origami/service/image/v2/images/raw/{{encode image.src}}?source=next-video-page&amp;width=670" class="hero__image" />
+					</a>
+				</div>
+				<div class="hero__explainer" data-o-grid-colspan="12 L6">
+					<h2 class="hero__title">
+						<a href="{{url}}" class="hero__title__link" data-trackable="title">{{title}}</a>
+					</h2>
+					<div class="hero__body">{{{bodyHTML}}}</div>
+				</div>
+			</div>
 		</div>
-	</div>
-</div>
+	{{/if}}
+{{/with}}
 
 <div data-trackable="slices">
 	{{#each slices}}
