@@ -45,7 +45,8 @@ const carouselFetcher = carouselId => {
 		};
 
 		return fetch(`https://next-api.ft.com/v1/query?${stringify(qs)}`, {
-			timeout: 3000
+			timeout: 3000,
+			useCorsProxy: true
 		})
 			.then(response => {
 				if (response.ok) {
