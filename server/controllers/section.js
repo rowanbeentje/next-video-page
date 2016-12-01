@@ -30,6 +30,6 @@ module.exports = (req, res) => {
 		res.redirect(sectionMapping[section]);
 	} else {
 		logger.warn({ event: 'UNKNOWN_SECTION', section });
-		res.redirect('/videos');
+		res.redirect('/video');
 	}
 };

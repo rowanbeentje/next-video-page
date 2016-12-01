@@ -38,11 +38,11 @@ module.exports = (req, res) => {
 				res.redirect(301, `/content/${video.id}`);
 			} else {
 				logger.error({ event: 'NO_VIDEO_CONTENT', brightcove_id: brightcoveId });
-				res.redirect('/videos');
+				res.redirect('/video');
 			}
 		})
 		.catch(err => {
 			logger.error({ event: 'BACKEND_ERROR', backend: 'next-api' }, err);
-			res.redirect('/videos');
+			res.redirect('/video');
 		});
 };
