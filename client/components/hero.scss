@@ -70,7 +70,8 @@
 	border-bottom: 0;
 	color: getColor('white');
 
-	&:hover {
+	&:hover,
+	&:focus {
 		color: getColor('white');
 	}
 }
