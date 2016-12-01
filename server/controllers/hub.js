@@ -42,7 +42,7 @@ module.exports = (req, res, next) => {
 					videos: latest
 				},
 				{
-					title: 'Editor‘s Picks',
+					title: 'Editor’s Picks',
 					id: 'editors-picks',
 					videos: editorsPicks
 				},
