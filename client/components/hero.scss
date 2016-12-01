@@ -68,8 +68,8 @@
 
 .hero__title__link {
 	border-bottom: 0;
-	color: getColor('white');
 
+	&,
 	&:hover,
 	&:focus {
 		color: getColor('white');
