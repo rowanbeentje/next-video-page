@@ -4,7 +4,8 @@ import { init as oDateInit } from 'o-date';
 
 const addArrow = function (el, direction) {
 	const arrowEl = document.createElement('button');
-	arrowEl.classList.add('carousel-arrow', `carousel-arrow--${direction}`);
+	// NOTE: classList polyfill doesn't accept multiple arguments to add
+	['carousel-arrow', `carousel-arrow--${direction}`].forEach(classItem => arrowEl.classList.add(classItem));
 	arrowEl.setAttribute('data-trackable', direction);
 	arrowEl.addEventListener('click', this.move.bind(this, direction));
 	el.appendChild(arrowEl);
