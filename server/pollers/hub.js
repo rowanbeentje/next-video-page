@@ -15,7 +15,7 @@ class HubPoller {
 
 	start () {
 		this.update();
-		setInterval(this.update, this.refreshInterval);
+		setInterval(this.update.bind(this), this.refreshInterval);
 	}
 
 	update () {
@@ -54,7 +54,7 @@ class HubPoller {
 			.then(data => {
 				this.currentFetch = null;
 				if (data) {
-					this.data = data
+					this.data = data;
 				}
 				return this.data;
 			});

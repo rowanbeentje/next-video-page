@@ -17,17 +17,19 @@ class Carousel {
 
 	constructor (carouselEl, { fetcher } = {}) {
 		this.carouselEl = carouselEl;
-		this.carouselInnerEl = carouselEl.querySelector('.carousel-inner');
+		this.carouselInnerEl = this.carouselEl.querySelector('.carousel-inner');
+		this.carouselItemsEl = this.carouselEl.querySelector('.carousel__items');
 		this.fetcher = fetcher;
 		this.position = 0;
 		this.offset = 0;
-		const addArrowToCarousel = addArrow.bind(this, this.carouselEl);
+		const addArrowToCarousel = addArrow.bind(this, this.carouselInnerEl);
 		['previous', 'next'].map(addArrowToCarousel);
-		carouselEl.setAttribute('data-carousel-js', '');
+		this.carouselEl.setAttribute('data-carousel-js', '');
+		this.updateButtons();
 	}
 
 	getCarouselWidth () {
-		return this.carouselInnerEl.offsetWidth;
+		return this.carouselItemsEl.offsetWidth;
 	}
 
 	getItemWidth () {
@@ -35,7 +37,7 @@ class Carousel {
 	}
 
 	getItems () {
-		return [...this.carouselInnerEl.querySelectorAll('.carousel__item')];
+		return [...this.carouselItemsEl.querySelectorAll('.carousel__item')];
 	}
 
 	getNumberItems () {
@@ -50,37 +52,63 @@ class Carousel {
 
 	move (direction) {
 		if (
-			(this.offset === 0 && direction === 'previous') ||
+			(this.position === 0 && direction === 'previous') ||
 			(this.position === (this.getNumberItems() - 1) && direction === 'next')
 		) {
 			return;
+		} else {
+			const newPosition = this.position + (this.getNumberVisibleItems() * (direction === 'next' ? 1 : -1));
+			this.position = clamp(newPosition, 0, this.lastPagePosition());
+			this.offset = this.getItems()[this.position].offsetLeft + 1;
+			// this.offset = this.position * this.getCarouselWidth();
+			this.carouselItemsEl.style.transform = `translate(-${this.offset}px)`;
+			this.loadMoreItems();
 		}
-		this.position = clamp(this.position + (this.getNumberVisibleItems() * (direction === 'next' ? 1 : -1)), 0, this.getNumberItems() - 1);
-		this.offset = this.position * this.getItemWidth();
-		this.carouselInnerEl.style.transform = `translate(-${this.offset}px)`;
-		this.loadMoreItems();
 	}
 
 	loadMoreItems () {
+		this.disableButton('next');
 		this.fetcher(this)
 			.then((items = []) => {
 				items.forEach(this.addItem.bind(this));
+				this.updateButtons();
 			});
 	}
 
 	addItem (itemData) {
 		const carouselItemEl = document.createElement('div');
-		carouselItemEl.classList.add('carousel__item', 'carousel__item--inactive');
-		carouselItemEl.setAttribute('data-o-grid-colspan', '6 L3');
+		carouselItemEl.classList.add('carousel__item');
+		carouselItemEl.setAttribute('data-o-grid-colspan', '12 S6 L4 XL3');
 		const templateData = Object.assign({}, itemData, {
 			mods: ['small', 'stacked', 'video'],
 			position: { default: 'bottom' }
 		});
 		carouselItemEl.innerHTML = nTeaserHeavyTemplate(templateData);
-		this.carouselInnerEl.appendChild(carouselItemEl);
+		this.carouselItemsEl.appendChild(carouselItemEl);
 		lazyLoadImages(carouselItemEl);
 		oDateInit(carouselItemEl);
 		return carouselItemEl;
+	}
+
+	disableButton (direction) {
+		this.carouselEl.querySelector(`.carousel-arrow--${direction}`).setAttribute('disabled', '');
+	}
+
+	enableButton (direction) {
+		this.carouselEl.querySelector(`.carousel-arrow--${direction}`).removeAttribute('disabled');
+	}
+
+	toggleButton (direction, state) {
+		this[`${state}Button`](direction);
+	}
+
+	updateButtons () {
+		this.toggleButton('previous', this.position === 0 ? 'disable' : 'enable');
+		this.toggleButton('next', this.position === this.lastPagePosition() ? 'disable' : 'enable');
+	}
+
+	lastPagePosition () {
+		return this.getNumberItems() - this.getNumberVisibleItems();
 	}
 
 }

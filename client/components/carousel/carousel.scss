@@ -7,8 +7,22 @@
 }
 
 .carousel-inner {
+	overflow: hidden;
+	width: 75%;
+	margin: 0 auto;
+
+	@include oGridRespondTo(L) {
+		width: 90%;
+	}
+}
+
+.carousel__items {
+	position: relative;
+	margin-top: 0;
+	margin-bottom: 0;
+	padding-left: 0;
 	transition-timing-function: ease;
-	transition-duration: 300ms;
+	transition-duration: 0.3s;
 	flex-wrap: nowrap;
 }
 
@@ -16,27 +30,38 @@
 	content: '';
 	position: absolute;
 	top: 0;
-	width: 400px;
+	width: 12.5%;
 	height: 100%;
 	padding: 0;
 	z-index: 1;
-	background: rgba(255, 241, 224, 0.7);
+	background: transparent;
 	border: 0;
+	transition: opacity 0.3s;
+
+	@include oGridRespondTo(L) {
+		width: 5%;
+	}
 
 	&:after {
 		@include oIconsGetIcon('arrow-left', #000000, 50);
 		content: '';
+		max-width: 100%;
+	}
+
+	&:hover,
+	&[disabled] {
+		opacity: 0.2;
 	}
 }
 
 .carousel-arrow--previous {
+	left: 0;
 	text-align: right;
-	right: 100%;
 }
 
 .carousel-arrow--next {
+	right: 0;
 	text-align: left;
-	left: 100%;
 
 	&:after {
 		@include oIconsGetIcon('arrow-right', #000000, 50, $apply-base-styles: false, $apply-width-height: false);

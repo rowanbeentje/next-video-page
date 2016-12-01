@@ -3,6 +3,8 @@ module.exports = `
 		title
 		url: relativeUrl
 		lastPublished
+		isOpinion
+		isEditorsChoice
 		tag: teaserTag {
 			url
 			name
