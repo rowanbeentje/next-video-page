@@ -1,9 +1,5 @@
 .carousel {
 	position: relative;
-
-	.core & {
-		overflow: scroll;
-	}
 }
 
 .carousel-inner {
@@ -14,6 +10,10 @@
 	@include oGridRespondTo(L) {
 		width: 90%;
 	}
+
+	.core & {
+		overflow: scroll;
+	}
 }
 
 .carousel__items {
@@ -21,8 +21,7 @@
 	margin-top: 0;
 	margin-bottom: 0;
 	padding-left: 0;
-	transition-timing-function: ease;
-	transition-duration: 0.3s;
+	transition: transform 0.3s ease;
 	flex-wrap: nowrap;
 }
 
@@ -66,4 +65,14 @@
 	&:after {
 		@include oIconsGetIcon('arrow-right', #000000, 50, $apply-base-styles: false, $apply-width-height: false);
 	}
+}
+
+.carousel__items {
+	white-space: nowrap;
+}
+
+.carousel__item {
+	display: inline-block;
+	float: none;
+	white-space: normal;
 }
