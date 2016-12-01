@@ -14,7 +14,7 @@ const addTeaserType = video => {
 	} else if (video.isEditorsChoice) {
 		type = 'editors-pick';
 	}
-	return Object.assign({}, video, { type, tag: { name: 'World'} });
+	return Object.assign({}, video, { type });
 };
 
 module.exports = (req, res, next) => {
