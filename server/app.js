@@ -11,11 +11,14 @@ hubPoller.start();
 const healthChecks = nHealth(path.resolve(__dirname, 'config', 'health-checks'));
 
 const app = express({
+	healthChecks: healthChecks.asArray(),
+	systemCode: 'next-video-page'
+});
+
+const video = express({
 	hasHeadCss: true,
 	hasNUiBundle: true,
-	healthChecks: healthChecks.asArray(),
 	layoutsDir: path.join(process.cwd(), 'bower_components', 'n-ui', 'layout'),
-	systemCode: 'next-video-page',
 	withAnonMiddleware: true,
 	withFlags: true,
 	withHandlebars: true,
@@ -23,18 +26,20 @@ const app = express({
 });
 
 app.get('/__gtg', controllers.gtg);
-app.get('/videos', controllers.hub);
+app.use('/video', video);
+
+video.get('/', controllers.hub);
 /**
  * Handle moving traffic over from the old video.ft.com site, e.g urls of the format
  *
  *  - /videos/5215993791001
  *  - /videos/5215993791001//Fillon-and-the-French-centre-right-vote/Editors-Choice
  */
-app.get('/videos/:id(\\d+)*?', controllers.video);
+video.get('/:id(\\d+)*?', controllers.video);
 /**
  * Currently acting as a catch all while we redirect traffic from video.ft.com
  */
-app.get('/videos/*', controllers.section);
+video.get('/*', controllers.section);
 
 const listen = app.listen(process.env.PORT || 3001);
 
