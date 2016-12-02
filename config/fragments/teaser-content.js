@@ -9,7 +9,7 @@ module.exports = `
 			url
 			name
 		}
-		genreTag {
+		genreTag(only: ["MQ==-R2VucmVz", "Mw==-R2VucmVz", "OQ==-R2VucmVz", "NA==-R2VucmVz", "MTA=-R2VucmVz"]) {
 			prefLabel
 		}
 		image: mainImage {
