@@ -10,7 +10,6 @@
     "o-date": "^2.7.0"
   },
   "resolutions": {
-    "o-teaser": "design-debt",
     "o-icons": "^5.1.3"
   }
 }

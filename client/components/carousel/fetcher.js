@@ -1,4 +1,4 @@
-import { fragments as teaserFragments } from '@financial-times/n-teaser';
+import { fragments as nTeaserFragments } from '@financial-times/n-teaser';
 import { broadcast } from 'n-ui/utils'
 
 import * as queries from '../../../config/queries';
@@ -23,10 +23,10 @@ const carouselFetcher = carouselId => {
 		}
 		const qs = {
 			query: encodeURIComponent(`
-				${teaserFragments.teaserExtraLight}
-				${teaserFragments.teaserLight}
-				${teaserFragments.teaserStandard}
-				${teaserFragments.teaserHeavy}
+				${nTeaserFragments.teaserExtraLight}
+				${nTeaserFragments.teaserLight}
+				${nTeaserFragments.teaserStandard}
+				${nTeaserFragments.teaserHeavy}
 				${teaserContentFragment}
 
 				${query}`
@@ -65,7 +65,6 @@ const carouselFetcher = carouselId => {
 						return data.section.videos;
 				}
 			})
-			.then(videos => videos.map(addTeaserType))
 			.catch(err => {
 				broadcast('oErrors.log', {
 					error: err,
