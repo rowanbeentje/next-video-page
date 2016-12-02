@@ -45,6 +45,8 @@
 		@include oIconsGetIcon('arrow-left', #000000, 50);
 		content: '';
 		max-width: 100%;
+		position: absolute;
+		top: 20%;
 	}
 
 	&:hover,
@@ -56,6 +58,10 @@
 .carousel-arrow--previous {
 	left: 0;
 	text-align: right;
+
+	&:after {
+		right: 0;
+	}
 }
 
 .carousel-arrow--next {
@@ -64,6 +70,7 @@
 
 	&:after {
 		@include oIconsGetIcon('arrow-right', #000000, 50, $apply-base-styles: false, $apply-width-height: false);
+		left: 0;
 	}
 }
 
