@@ -5,6 +5,18 @@
 		padding-bottom: 0;
 	}
 
+	.o-teaser__duration {
+		@include oTypographySansData(m);
+		line-height: 18px;
+		color: #656059;
+		display: inline-block;
+		margin: 0 0 0 10px;
+
+		&:first-child {
+			margin-left: 0;
+		}
+	}
+
 	.o-teaser__image-container {
 		@include oGridRespondTo($until: M) {
 			flex-basis: 100%;
