@@ -2,8 +2,8 @@ module.exports = `
 	query ($from: Int, $limit: Int!) {
 		video {
 			hero: editorsPicks(limit: 1) {
-				bodyHTML
 				...teaserContent
+				bodyHTML
 			}
 			editorsPicks(from: 1, limit: $limit) {
 				...teaserContent

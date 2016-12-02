@@ -1,4 +1,5 @@
 const logger = require('@financial-times/n-logger');
+const teaserFragments = require('@financial-times/n-teaser').fragments;
 const createError = require('http-errors');
 const querystring = require('querystring');
 
@@ -24,6 +25,10 @@ class HubPoller {
 		}
 		const qs = querystring.stringify({
 			query: `
+				${teaserFragments.teaserExtraLight}
+				${teaserFragments.teaserLight}
+				${teaserFragments.teaserStandard}
+				${teaserFragments.teaserHeavy}
 				${queryFragments.sliceContent}
 				${queryFragments.teaserContent}
 

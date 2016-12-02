@@ -1,4 +1,4 @@
-import nTeaserHeavyTemplate from '../../../bower_components/n-teaser/templates/heavy.html';
+import nTeaserHeavyTemplate from '@financial-times/n-teaser/templates/heavy.html';
 import { lazyLoad as lazyLoadImages } from 'n-image';
 import { init as oDateInit } from 'o-date';
 

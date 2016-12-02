@@ -1,4 +1,5 @@
 const express = require('@financial-times/n-express');
+const nTeaser = require('@financial-times/n-teaser');
 const nHealth = require('n-health');
 const path = require('path');
 
@@ -18,6 +19,9 @@ const app = express({
 const video = express({
 	hasHeadCss: true,
 	hasNUiBundle: true,
+	helpers: {
+		nTeaserPresenter: nTeaser.presenter
+	},
 	layoutsDir: path.join(process.cwd(), 'bower_components', 'n-ui', 'layout'),
 	withAnonMiddleware: true,
 	withFlags: true,
