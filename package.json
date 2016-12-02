@@ -8,6 +8,7 @@
     "@financial-times/n-logger": "^5.4.6",
     "forever": "^0.15.3",
     "http-errors": "^1.5.1",
+    "moment": "^2.17.0",
     "n-health": "^1.10.4"
   },
   "devDependencies": {

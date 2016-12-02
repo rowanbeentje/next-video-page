@@ -1,10 +1,6 @@
 .hero {
-	margin-top: 35px;
+	margin-top: 15px;
 	margin-bottom: 35px;
-
-	@include oGridRespondTo(L) {
-		max-width: 1388px;
-	}
 }
 
 .hero__image-wrapper {
@@ -15,7 +11,6 @@
 	display: block;
 	position: relative;
 	border-bottom: 0;
-	padding-bottom: percentage(9/16);
 
 	&:after {
 		content: '';
@@ -25,17 +20,24 @@
 		background-image: url('https://www.ft.com/__origami/service/image/v2/images/raw/fticon-v1:play?source=next-video-page&tint=%23FFFFFF,%23FFFFFF&format=svg');
 		background-color: #000000;
 		background-size: cover;
-		width: 15%;
-		height: 15% * (16 / 9);
+		width: 40px;
+		height: 40px;
+
+		@include oGridRespondTo(M) {
+			width: 60px;
+			height: 60px;
+		}
+
+		@include oGridRespondTo(L) {
+			width: 80px;
+			height: 80px;
+		}
 	}
 }
 
 .hero__image {
 	display: block;
-	position: absolute;
 	width: 100%;
-	top: 0;
-	left: 0;
 }
 
 .hero__explainer {
@@ -54,11 +56,13 @@
 
 .hero__title {
 	@include oTypographySansData(xl, $load-progressively: true);
-	margin: 0;
+	margin: 10px 0 0;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
 
 	@include oGridRespondTo(M) {
 		// TODO: get on scale, or don't override
-		@include oTypographyFallbackFontSize('sansData', 52px);
+		@include oTypographyFallbackFontSize('sansData', 48px);
 		line-height: 1em;
 	}
 }
@@ -73,13 +77,24 @@
 	}
 }
 
-.hero__body {
-	@include oTypographySansData(l, $load-progressively: true);
-	color: #a7a9ac;
+.hero__body,
+.hero__duration {
+	color: #d3d4d5;
+	text-rendering: optimizeLegibility;
+	-webkit-font-smoothing: antialiased;
 
 	p {
 		margin: 20px 0 0;
 	}
+}
+
+.hero__body {
+	@include oTypographySansData(l, $load-progressively: true);
+}
+
+.hero__duration {
+	@include oTypographySansData(s, $load-progressively: true);
+	margin: 0;
 }
 
 /**

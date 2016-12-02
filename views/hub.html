@@ -28,10 +28,11 @@
 			<div class="o-grid-row">
 				<div class="hero__image-wrapper" data-o-grid-colspan="12 L6">
 					<a href="{{url}}" class="hero__image-link" data-trackable="image">
-						<img src="https://www.ft.com/__origami/service/image/v2/images/raw/{{encode image.url}}?source=next-video-page&amp;width=670" class="hero__image" />
+						<img src="https://www.ft.com/__origami/service/image/v2/images/raw/{{encode image.url}}?source=next-video-page&amp;width=708" class="hero__image" />
 					</a>
 				</div>
 				<div class="hero__explainer" data-o-grid-colspan="12 L6">
+					<p class="hero__duration">{{formattedDuration}}</p>
 					<h2 class="hero__title">
 						<a href="{{url}}" class="hero__title__link" data-trackable="title">{{title}}</a>
 					</h2>
@@ -45,7 +46,7 @@
 <div data-trackable="slices">
 	{{#each slices}}
 		<div class="o-teaser-collection o-grid-container" data-trackable="{{trackingId}}">
-			<h2 class="o-teaser-collection__heading o-teaser-collection__heading--half-width">
+			<h2 class="o-teaser-collection__heading o-teaser-collection__heading--third-width">
 				{{#if url}}
 					<a href="{{url}}" data-trackable="title">{{title}}</a>
 				{{else}}

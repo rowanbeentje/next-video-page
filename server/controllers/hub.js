@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 const hubPoller = require('../pollers/hub');
 const identity = require('../utils/idenitity');
 
@@ -16,6 +18,11 @@ const addTeaserType = video => {
 		type = 'editors-pick';
 	}
 	return Object.assign({}, video, { type });
+};
+
+const addFormattedDuration = video => {
+	const duration = moment(video.duration);
+	return Object.assign({}, video, { formattedDuration: `${duration.minutes()}.${duration.seconds()}min` });
 };
 
 module.exports = (req, res, next) => {
@@ -64,7 +71,7 @@ module.exports = (req, res, next) => {
 				layout: 'wrapper',
 				title: 'Financial Times | Videos',
 				useLatestHeroStyling,
-				hero: addTeaserType(hero),
+				hero: addFormattedDuration(hero),
 				slices
 			});
 		})
