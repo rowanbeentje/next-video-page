@@ -10,16 +10,6 @@ const addTrackingId = item => {
 	return Object.assign({}, item, { trackingId });
 };
 
-const addTeaserType = video => {
-	let type = '';
-	if (video.isOpinion) {
-		type = 'opinion';
-	} else if (video.isEditorsChoice) {
-		type = 'editors-pick';
-	}
-	return Object.assign({}, video, { type });
-};
-
 const addFormattedDuration = video => {
 	const duration = moment(video.duration);
 	return Object.assign({}, video, { formattedDuration: `${duration.minutes()}.${duration.seconds()}min` });
@@ -62,11 +52,8 @@ module.exports = (req, res, next) => {
 			]
 				.filter(identity)
 				.filter(({ videos = [] } = {}) => videos.length)
-				.map(addTrackingId)
-				.map(slice => {
-					const videos = slice.videos.map(addTeaserType);
-					return Object.assign({}, slice, { videos })
-				});
+				.map(addTrackingId);
+
 			res.render('hub', {
 				layout: 'wrapper',
 				title: 'Financial Times | Videos',
