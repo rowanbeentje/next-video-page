@@ -38,11 +38,6 @@
 .hero__image {
 	display: block;
 	width: 100%;
-
-	@include oGridRespondTo(L) {
-		width: auto;
-		height: 100%;
-	}
 }
 
 .hero__explainer {
