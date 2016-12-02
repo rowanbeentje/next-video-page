@@ -12,19 +12,28 @@ module.exports = `
 				...teaserContent
 			}
 		}
-		latest: latestContent(limit: $limit, type: Video ) {
-			...teaserContent
+		world: tag(id: "MQ==-U2VjdGlvbnM=") {
+			...sliceContent
 		}
 		markets: tag(id: "NzE=-U2VjdGlvbnM=") {
 			...sliceContent
 		}
-		world: tag(id: "MQ==-U2VjdGlvbnM=") {
+		opinion: tag(id: "MTE2-U2VjdGlvbnM=") {
 			...sliceContent
 		}
 		companies: tag(id: "Mjk=-U2VjdGlvbnM=") {
 			...sliceContent
 		}
+		shortView: tag(id: "MjFjOTI0Y2YtNGFlOS00OTMzLWJhMjEtNjBjNjE2YTRhMmJi-QnJhbmRz") {
+			...sliceContent
+		}
+		lex: tag(id: "YzhlNzZkYTctMDJiNy00NTViLTk3NmYtNmJjYTE5NDEyM2Yw-QnJhbmRz") {
+			...sliceContent
+		}
 		lifeAndArts: tag(id: "MTQ4-U2VjdGlvbnM=") {
+			...sliceContent
+		}
+		workAndCareers: tag(id: "MTI1-U2VjdGlvbnM=") {
 			...sliceContent
 		}
 	}

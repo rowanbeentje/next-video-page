@@ -28,27 +28,25 @@ module.exports = (req, res, next) => {
 					editorsPicks = [],
 					popular = []
 				} = {},
-				latest = [],
-				markets = {},
-				companies = {},
 				world = {},
-				lifeAndArts = {}
+				markets = {},
+				opinion = {},
+				companies = {},
+				shortView = {},
+				lex = {},
+				lifeAndArts = {},
+				workAndCareers = {}
 			} = {}
 		} = {}) => {
-			const sections = [markets, companies, world, lifeAndArts];
+			const sections = [world, markets, opinion, companies, shortView, lex, lifeAndArts, workAndCareers];
 			const slices = [
 				{
-					title: 'Latest',
-					id: 'latest',
-					videos: latest
-				},
-				{
-					title: 'Editor’s Picks',
+					title: 'Editor’s Choice',
 					id: 'editors-picks',
 					videos: editorsPicks
 				},
 				{
-					title: 'Popular',
+					title: 'Trending',
 					id: 'popular',
 					videos: popular
 				},
