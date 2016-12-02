@@ -21,6 +21,9 @@ module.exports = `
 		opinion: tag(id: "MTE2-U2VjdGlvbnM=") {
 			...sliceContent
 		}
+		ftFeatures: tag(id: "NGQ2MWQ0NDMtMDc5Mi00NWExLTlkMGQtNWZhZjk0NGExOWU2-R2VucmVz") {
+			...sliceContent
+		}
 		companies: tag(id: "Mjk=-U2VjdGlvbnM=") {
 			...sliceContent
 		}

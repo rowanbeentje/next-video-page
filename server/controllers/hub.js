@@ -31,6 +31,7 @@ module.exports = (req, res, next) => {
 				world = {},
 				markets = {},
 				opinion = {},
+				ftFeatures = {},
 				companies = {},
 				shortView = {},
 				lex = {},
@@ -38,7 +39,7 @@ module.exports = (req, res, next) => {
 				workAndCareers = {}
 			} = {}
 		} = {}) => {
-			const sections = [world, markets, opinion, companies, shortView, lex, lifeAndArts, workAndCareers];
+			const sections = [world, markets, opinion, ftFeatures , companies, shortView, lex, lifeAndArts, workAndCareers];
 			const slices = [
 				{
 					title: 'Editor’s Choice',
