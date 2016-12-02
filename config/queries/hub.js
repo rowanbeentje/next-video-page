@@ -27,9 +27,6 @@ module.exports = `
 		companies: tag(id: "Mjk=-U2VjdGlvbnM=") {
 			...sliceContent
 		}
-		shortView: tag(id: "MjFjOTI0Y2YtNGFlOS00OTMzLWJhMjEtNjBjNjE2YTRhMmJi-QnJhbmRz") {
-			...sliceContent
-		}
 		lex: tag(id: "YzhlNzZkYTctMDJiNy00NTViLTk3NmYtNmJjYTE5NDEyM2Yw-QnJhbmRz") {
 			...sliceContent
 		}

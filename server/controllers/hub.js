@@ -34,13 +34,12 @@ module.exports = (req, res, next) => {
 				opinion = {},
 				ftFeatures = {},
 				companies = {},
-				shortView = {},
 				lex = {},
 				lifeAndArts = {},
 				workAndCareers = {}
 			} = {}
 		} = {}) => {
-			const sections = [world, markets, opinion, ftFeatures , companies, shortView, lex, lifeAndArts, workAndCareers];
+			const sections = [world, markets, opinion, ftFeatures , companies, lex, lifeAndArts, workAndCareers];
 			const slices = [
 				{
 					title: 'Editor’s Choice',
