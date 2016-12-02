@@ -1,4 +1,5 @@
 const hubPoller = require('../pollers/hub');
+const identity = require('../utils/idenitity');
 
 const addTrackingId = item => {
 	const trackingId = item.title.toLowerCase()
@@ -53,6 +54,7 @@ module.exports = (req, res, next) => {
 				},
 				...sections
 			]
+				.filter(identity)
 				.filter(({ videos = [] } = {}) => videos.length)
 				.map(addTrackingId)
 				.map(slice => {
